@@ -1,0 +1,282 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* fonts */
+
+@font-face{
+    font-family: poppins;
+    src: url('../fonts/Poppins-Regular.ttf')
+}
+
+/* colors */
+
+:root {
+    --primary: #aa0000;
+    --first: #966363;
+    --second: #eb4d4d;
+    --third: #6b5959;
+    --fourth: #413434;
+    --fifth: #332020;
+}
+
+
+body{
+    height: 100%;
+    background-color: #f1f1f1;
+    font-family: poppins;
+}
+
+h1{
+    text-align: center;
+    padding: 20px;
+}
+
+/* Navigation */
+
+nav{
+    text-align: center;
+    width: 20%;
+    min-height: 100% !important;
+    height: 100%;
+    border-right: 1px solid #ddd;
+    padding: 80px;
+    background-color: white;
+    float: left;
+}
+
+nav ul{
+    list-style-type: none;
+}
+
+nav li{
+    text-align: left;
+    margin-bottom: 60px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    padding: 10px;
+}
+
+/*content*/
+
+.tool-display{
+    width: 80%;
+    height: 100%;
+    float: left;
+    border: none;
+    position: absolute;
+}
+
+a{
+    text-decoration: none;
+}
+
+.backtosite::before{
+    content: '\0025C2';
+    font-size: 1.8rem;
+    vertical-align: -10%;
+}
+
+.backtosite:hover{
+    color: #777;
+}
+
+
+input[type=text]{
+    padding: 6px;
+    width: 100%;
+}
+
+/* Sort drop down menu */
+
+select{
+    font-size: .8rem;
+    padding: .4rem 2rem .4rem .4rem;
+    background: var(--fifth);
+    color: white;
+    border: 0;
+    overflow: hidden;
+
+}
+
+
+.custom-select{
+    position: relative;
+    display: inline;
+    padding: auto;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+}
+
+
+.custom-arrow{
+    position: absolute;
+    top: -.15rem;
+    right: 0;
+    display: block;
+    background-color: var(--fourth);
+    height: 130%;
+    width: 2rem;
+    pointer-events: none;
+}
+
+.custom-arrow::before,
+.custom-arrow:after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.custom-arrow::before{
+    border-left: .4em solid transparent;
+    border-right: .4em solid transparent;
+    border-bottom: .4em solid #ddd;
+    top: 35%;
+}
+
+.custom-arrow::after{
+    border-left: .4em solid transparent;
+    border-right: .4em solid transparent;
+    border-top: .4em solid #ddd;
+    top: 65%;
+}
+
+.go-btn{
+    display: inline; 
+    padding: 4px 8px; 
+    background-color: green; 
+    color: white; 
+    margin: 4px; 
+    border-radius: 5px;
+}
+
+.go-btn:active{
+    font-size: .9rem;
+}
+
+
+.member-search{
+    padding: .4rem; 
+    margin-left: -10px;
+    border-radius: 0px 25px 25px 0px; 
+    color: white; background-color: black; 
+    font-weight: bold; 
+    background-color: var(--fourth);
+    cursor: pointer;
+}
+
+.member-search:hover{
+    background-color: var(--fifth);
+}
+
+/* Members table */
+
+.members-list table{
+    width: 100%;
+    margin-top: 80px;
+}
+
+.members-list table{
+    text-align: center;
+    border: 1px solid black;
+    border-spacing: 0px;
+}
+
+
+.members-list th{
+    background-color: black;
+    color: white;
+}
+
+.members-list tr:hover{
+    background-color: #ddd;
+}
+
+.members-list td{
+    border: 1px solid black;
+    padding: 12px;
+    margin: 0;
+}
+
+.editbtn{
+    font-weight: bold;
+    background-color: #777;
+    color: black;
+    padding: 6px 9px;
+    border: 1px solid black;
+}
+
+.editbtn:hover{
+    background-color: #999;
+}
+
+.editbtn:active{
+    font-size: .98rem;
+}
+
+/* Edit user page */
+
+.content-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px;
+}
+
+.content-wrapper table{
+    background-color: white;
+    border-radius: 15%;
+    border: 1px solid #666;
+    padding: 80px;
+    padding-top: 10px;
+}
+
+.content-wrapper table h1{
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+
+.content-wrapper table tr td{
+    padding: 6px;
+}
+
+.content-wrapper a{
+    text-decoration: none;
+    color: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper button{
+    background-color: var(--fifth);
+    width: 100%;
+    color: #fff;
+    padding: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.content-wrapper button:hover{
+    background-color: var(--fourth)
+}
+

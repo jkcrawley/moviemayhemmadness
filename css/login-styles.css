@@ -1,0 +1,125 @@
+.login{
+    display: block;
+    background-color: white;
+    margin: 0 auto;
+    width: 1080px;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login h2{
+    text-align: center;
+}
+
+.login table{
+    text-align: left;
+    width: 400px;
+}
+
+.login tr td{
+    padding: 32px;
+}
+
+input[type=text]{
+    padding: 12px;
+    width: 100%;
+}
+
+input[type=text]:focus{
+    border-color: var(--second);
+    outline: none;
+}
+
+input[type=password]{
+    padding: 12px;
+    width: 100%;
+}
+
+input[type=password]:focus{
+    outline: none;
+    border-color: var(--second);
+}
+
+input[type=submit]{
+    float: right;
+    border: 0px;
+    width: 100%;
+    padding: 12px 18px;
+    font-weight: bold;
+    font-family: poppins;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: var(--fifth);
+    color: #ddd;
+    transition: all .1s ease-in-out;
+    border-radius: 24px;
+    width: 100%;
+}
+
+input[type=submit]:hover{
+    background-color: var(--third);
+    color: white;
+}
+
+input[type=submit]:active{
+    font-size: 1.1rem;
+}
+
+
+.logsuccess{
+    display: block;
+    background-color: white;
+    margin: 0 auto;
+    width: 1080px;
+    height: 600px;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.error-message{
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 0px 20px;
+    margin-top: 10px;
+}
+
+.error-message ul{
+    padding: 18px;
+}
+
+.error-message ul li{
+    color: red;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px){
+    .login{
+        width: 100%;
+        height: 100%;
+    }
+
+    .login table{
+        width: 100%;
+    }
+
+    h2{
+        font-size: 1.2rem;
+    }
+
+    .error-message{
+        width: 100%;
+        height: 100%;
+    }
+
+    .logsuccess{
+        width: 100%;
+    }
+
+
+}

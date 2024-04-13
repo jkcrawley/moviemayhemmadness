@@ -1,0 +1,190 @@
+.register{
+    display: block;
+    background-color: white;
+    margin: 0 auto;
+    width: 1080px;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register h2{
+    text-align: center;
+}
+
+.register table{
+    text-align: left;
+}
+
+.register tr td{
+    padding: 32px;
+}
+
+input[type=text]{
+    padding: 12px;
+    width: 100%;
+}
+
+input[type=text]:focus{
+    border-color: var(--second);
+    outline: none;
+}
+
+input[type=email]{
+    padding: 12px;
+    width: 100%;
+}
+
+input[type=email]:focus{
+    outline: none;
+    border-color: var(--second);
+}
+
+input[type=password]{
+    padding: 12px;
+    width: 100%;
+}
+
+input[type=password]:focus{
+    outline: none;
+    border-color: var(--second);
+}
+
+input[type=submit]{
+    float: right;
+    border: 0px;
+    padding: 12px 18px;
+    font-weight: bold;
+    font-family: poppins;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: var(--fifth);
+    color: #ddd;
+    transition: all .1s ease-in-out;
+    border-radius: 24px;
+    width: 100%;
+}
+
+input[type=submit]:hover{
+    background-color: var(--third);
+    color: white;
+}
+
+input[type=submit]:active{
+    font-size: 1.1rem;
+}
+
+/* password validation */
+
+.password-message{
+    display: none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.password-message p{
+    padding: 10px 35px;
+}
+
+.valid{
+    color: green;
+}
+
+.valid:before{
+    position: relative;
+    left: -35px;
+    content: "\2714";
+}
+
+.invalid{
+    color: red;
+}
+
+.invalid:before{
+    position: relative;
+    left: -35px;
+    content: "\2716";
+}
+
+/* confirm password */
+
+.confirm-message{
+    display: none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.confirm-message p{
+    padding: 10px 35px;
+}
+
+
+
+/*email validation*/
+
+.email-message{
+    display: none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.email-message p{
+    padding: 10px 35px;
+}
+
+/*php validation*/
+
+.php-error{
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.php-error ul{
+    padding: 0px 18px;
+}
+
+.php-error ul li{
+    color: red;
+}
+
+.success-message{
+    display: none;
+    background-color: white;
+    margin: 0 auto;
+    width: 1080px;
+    height: 600px;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px){
+    .register{
+        width: 100%;
+    }
+
+    h2{
+        font-size: 1.2rem;
+    }
+
+    .mobile-heading{
+        display: block;
+        margin-bottom: 18px;
+    }
+}

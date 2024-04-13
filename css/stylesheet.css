@@ -1,0 +1,73 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    margin: 0;
+    padding: 0;
+}
+
+/* colors */
+
+:root {
+    --primary: #aa0000;
+    --first: #966363;
+    --second: #eb4d4d;
+    --third: #6b5959;
+    --fourth: #413434;
+    --fifth: #332020;
+}
+
+/* fonts */
+
+@font-face{
+    font-family: marques;
+    src: url('../fonts/Marques-Regular.otf');
+}
+
+@font-face{
+    font-family: montserrat;
+    src: url('../fonts/Montserrat-Regular.ttf')
+}
+
+@font-face{
+    font-family: poppins;
+    src: url('../fonts/Poppins-Regular.ttf')
+}
+
+/* main styles */
+
+body{
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(170,0,0,1) 20%, rgba(170,0,0,1) 80%, rgba(0,0,0,1) 100%);
+    font-family: montserrat;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: poppins;
+}
+
+
+h4{
+    margin: 0px;
+    padding: 0px;
+    display: inline;
+}
+
+p{
+    margin: 12px;
+}
+
+a{
+    color: var(--first);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--second);
+}
