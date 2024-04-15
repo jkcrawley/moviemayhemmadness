@@ -3,7 +3,7 @@
 ## Completed
 - Add Movie Section
 
-    - Added capability of story movie title, release date, and Summary into sessions
+    - Added capability to store movie title, release date, and Summary into sessions to be used across the "add movie" tool.
     - Added "next" button that goes to a page to Add Crew.add readme
     - Created blank "Add Crew" page.
 
