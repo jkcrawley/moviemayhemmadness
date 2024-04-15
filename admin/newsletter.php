@@ -72,11 +72,15 @@ if($_SESSION['userlevel'] != 'admin'){
             
             tinymce.init({
                 selector: '#textbody',
-                plugins : 'image',
-		        toolbar : 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image',
+                plugins : 'allychecker image formatpainter media',
+		        toolbar : 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image | media',
                 license_key: 'gpl',
                 images_upload_url : 'upload.php',
-                automatic_uploads: true
+                automatic_uploads: true,
+
+                relative_urls : false,
+                remove_script_host : false,
+                convert_urls : true,
                 
             });
         </script>

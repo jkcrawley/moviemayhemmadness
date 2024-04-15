@@ -44,10 +44,10 @@ $registerDisplay = 'flex';
 if(isset($_POST['submit'])){
 
 //set variables
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $conpassword = $_POST['confirm-password'];
+    $username = mysqli_escape_string($conn, $_POST['username']);
+    $email = mysqli_escape_string($conn, $_POST['email']);
+    $password = mysqli_escape_string($conn, $_POST['password']);
+    $conpassword = mysqli_escape_string($conn, $_POST['confirm-password']);
     $newsletter = 'no';
     $request = 'no';
 

@@ -31,8 +31,8 @@ $loginToggle = '';
 $errorMessage = '';
 
 if(isset($_POST['submit'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = mysqli_escape_string($conn, $_POST['username']);
+    $password = mysqli_escape_string($conn, $_POST['password']);
 
     //find username and password in SQL database
     $sqlLogin = "SELECT u_id, u_username, u_password, u_level FROM users WHERE u_username = '$username'";

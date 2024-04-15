@@ -1,4 +1,17 @@
-# v0.1
+# v 0.2
+
+## Completed
+- Add Movie Section
+    -Added capability of story movie title, release date, and Summary into sessions
+    -Added "next" button that goes to a page to Add Crew.
+    -Created blank "Add Crew" page.
+
+## WIP
+- Add Movie Section
+    - Add Crew Page that allows users to search for crew members. If crew member doesn't exist in database, then user can add them to database.
+    - Add ability to add roles to crew members.
+
+# v 0.1
 
 ## Completed
 
