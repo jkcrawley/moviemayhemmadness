@@ -1,3 +1,10 @@
+# v 0.3
+
+## Completed
+- Add Movie Section
+    - addcrew.php: Added search function for adding cast and crew.
+    - addcrew.php: Added a popup modal to add names that doesn't exist in database
+
 # v 0.2
 
 ## Completed

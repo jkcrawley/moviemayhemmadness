@@ -78,6 +78,7 @@ nav ul li a{
     font-weight: bold;
     cursor: pointer;
     font-size: 1rem;
+    float: right;
 }
 
 .nextbtn:hover{
@@ -88,6 +89,27 @@ nav ul li a{
 .nextbtn:active{
     font-size: .95rem;
 }
+
+.backbtn{
+    padding: 10px 14px;
+    border: none;
+    background-color: var(--fifth);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-block; 
+}
+
+.backbtn:hover{
+    background-color: var(--fourth);
+
+}
+
+.backbtn:active{
+    font-size: .95rem;
+}
+
 
 /*content*/
 
@@ -304,3 +326,50 @@ select{
     background-color: var(--fourth)
 }
 
+/* Add movie section */
+
+#modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 15px;
+    z-index: 10;
+    width: 600px;
+    max-width: 0%;
+    height: 600px;
+    max-height: 0%;
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    overflow: hidden;
+}
+
+#modalbtn{
+    display: none;
+    position: fixed;
+    right: 0;
+    margin: 20px; 
+    padding: 5px 10px; 
+    font-weight: bold; 
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.inewmember{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.overlay{
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    top: 0%;
+    display: none;
+}

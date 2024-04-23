@@ -1,6 +1,7 @@
 <?php
 SESSION_START();
 
+include('../includes/config.php');
 
 ?>
 
@@ -16,11 +17,102 @@ SESSION_START();
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="../css/admin.css">
     </head>
-    <body>
 
+<?php
+$crewSQL = "SELECT * FROM crew_members";
+$crewResult = mysqli_query($conn, $crewSQL)
+?>
+
+<script defer>
+let crewArr = [];
+
+<?php
+while($crewRow= mysqli_fetch_array($crewResult, MYSQLI_ASSOC)){
+   $c_id= $crewRow['cr_id'];
+   $fname = $crewRow['cr_fname'];
+   $lname = $crewRow['cr_lname'];
+   $fullname = $fname . ' ' . $lname;
+?>
+crewArr.push("<?php echo $fullname; ?>")
+
+
+<?php
+}
+?>
+
+console.log(crewArr);
+
+function searchRes(){
+    const filtered = crewArr.filter(v => v.includes(document.getElementById('crewname').value));
+
+    console.log(filtered);
+
+    if(filtered.length === 0 || document.getElementById('crewname').value == '' || document.getElementById('crewname').value == ' '){
+        document.getElementById('crewSearch').innerHTML = "<i>No Results for </i>'" + document.getElementById('crewname').value + "'";
+    } else {
+        document.getElementById('crewSearch').innerHTML = filtered.join('<br />');
+    }
+
+    
+}
+
+
+</script>
+    <body>
+        <div class="content-wrapper">
+            <form action="addcrew.php" method="post">
+                <table>
+                    <tr>
+                        <td colspan="2" align="center"><h1>Add Cast &amp; Crew</h1></td>
+                    </tr>
+                    <tr>
+                        <td><b><label for="fname">Crew Member's Name:  </label></b></td>
+                        <td><input type='text' name='crewname' id='crewname' onkeyup='searchRes()'/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p id='crewSearch'></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'>Can't find actor, director, producer, etc.? <a href="addmember.php" target="inewmember" onclick='openModal()'>Add Them here</a>
+                    </tr>
+                    <tr>
+                        <td colspan='2'>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><b><label for="role"><b>Crew Member's Role:  </b></label></td>
+                        <td>
+                            <select name='role' id='role'>
+                                <option value=''>-</option>
+                                <option value='director'>Director</option>
+                                <option value='actor'>Actor</option>
+                                <option value='producer'>Producer</option>
+                                <option value='screenwriter'>ScreenWriter</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' style='padding: 40px;'>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><input type='button' class='backbtn' onclick="location.href='addmovie.php'" value='&larr; Back' /></td>
+                        <td><input type='submit' class='nextbtn' value='Next &rarr;'/>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="modal" id='modal'>
+            <button id='modalbtn' onclick='closeModal(), location.reload()'>x</button>
+            <iframe name='inewmember' id='inewmember' class='inewmember' title='New Member Window'></iframe>
+        </div>
+        <div class="overlay" onclick="closeModal(), location.reload()"></div>
         
-        <script src="" async defer></script>
+        <script src="../scripts/admin.js" async defer></script>
     </body>
 </html>

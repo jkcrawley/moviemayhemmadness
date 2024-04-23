@@ -22,7 +22,6 @@ if(isset($_POST['nextBtn'])){
         $_SESSION['date'] = $releaseDate;
         $_SESSION['runtime'] = $_POST['runtime'];
         $_SESSION['summary'] = $_POST['summary'];
-        $_SESSION['description'] = $_POST['description'];
 
         echo "<script>window.location.href='addcrew.php';</script>";
     }
@@ -80,17 +79,10 @@ if(isset($_POST['nextBtn'])){
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2"><textarea style='width:400px; height: 100px;' name='summary' placeholder='Maximum 60 characters' required></textarea></td>
+                <td colspan="2"><textarea style='width:400px; height: 100px;' name='summary' placeholder='Maximum 60 characters' required><?php if(isset($_SESSION['summary'])){ echo $_SESSION['summary']; }?></textarea></td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
-            </tr>
-            <tr>
-                <td><b>Description:</b></td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="2"><textarea style='width:400px; height: 200px;' name='description'></textarea></td>
             </tr>
             <tr>
                 <td colspan='2' style='text-align: right;'>
