@@ -373,3 +373,7 @@ select{
     top: 0%;
     display: none;
 }
+
+.crewsection{
+    display: none;
+}

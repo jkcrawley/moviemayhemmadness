@@ -23,3 +23,13 @@ function closeModal(){
         document.getElementById('modalbtn').style.display = 'none';
     }
 }
+
+function roleSelect(){
+    const selectMenu = document.getElementById('role');
+    let crewSection = document.querySelectorAll('.crewsection');
+    
+    for(let i = 0; i < crewSection.length; i++){
+        crewSection[i].style.display = 'table-row';
+    } 
+
+}

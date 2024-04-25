@@ -22,7 +22,7 @@ include('../includes/config.php');
 
 <?php
 $crewSQL = "SELECT * FROM crew_members";
-$crewResult = mysqli_query($conn, $crewSQL)
+$crewResult = mysqli_query($conn, $crewSQL);
 ?>
 
 <script defer>
@@ -33,7 +33,7 @@ while($crewRow= mysqli_fetch_array($crewResult, MYSQLI_ASSOC)){
    $c_id= $crewRow['cr_id'];
    $fname = $crewRow['cr_fname'];
    $lname = $crewRow['cr_lname'];
-   $fullname = $fname . ' ' . $lname;
+   $fullname = "<button style='padding: 6px; margin: 8px; width: auto;'>" . $fname . ' ' . $lname . '</button>';
 ?>
 crewArr.push("<?php echo $fullname; ?>")
 
@@ -59,16 +59,30 @@ function searchRes(){
 }
 
 
+
 </script>
     <body>
         <div class="content-wrapper">
             <form action="addcrew.php" method="post">
                 <table>
+
                     <tr>
                         <td colspan="2" align="center"><h1>Add Cast &amp; Crew</h1></td>
                     </tr>
                     <tr>
-                        <td><b><label for="fname">Crew Member's Name:  </label></b></td>
+                        <td><b><label for="role"><b>Select Role:  </b></label></td>
+                        <td>
+                            <select name='role'  onchange='roleSelect()' id='role'>
+                                <option value=''>-</option>
+                                <option value='director'>Director</option>
+                                <option value='actor'>Actor</option>
+                                <option value='producer'>Producer</option>
+                                <option value='screenwriter'>ScreenWriter</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class='crewsection'>
+                        <td><b><label for="fname">Search for Name:  </label></b></td>
                         <td><input type='text' name='crewname' id='crewname' onkeyup='searchRes()'/></td>
                     </tr>
                     <tr>
@@ -79,32 +93,24 @@ function searchRes(){
                     <tr>
                         <td colspan='2'>&nbsp;</td>
                     </tr>
-                    <tr>
+                    <tr class='crewsection'>
                         <td colspan='2'>Can't find actor, director, producer, etc.? <a href="addmember.php" target="inewmember" onclick='openModal()'>Add Them here</a>
                     </tr>
                     <tr>
                         <td colspan='2'>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td><b><label for="role"><b>Crew Member's Role:  </b></label></td>
-                        <td>
-                            <select name='role' id='role'>
-                                <option value=''>-</option>
-                                <option value='director'>Director</option>
-                                <option value='actor'>Actor</option>
-                                <option value='producer'>Producer</option>
-                                <option value='screenwriter'>ScreenWriter</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan='2' style='padding: 40px;'>&nbsp;</td>
                     </tr>
                     <tr>
+
                         <td><input type='button' class='backbtn' onclick="location.href='addmovie.php'" value='&larr; Back' /></td>
                         <td><input type='submit' class='nextbtn' value='Next &rarr;'/>
                     </tr>
                 </table>
+                <div class='crew-display'>
+
+                </div>
             </form>
         </div>
         <div class="modal" id='modal'>

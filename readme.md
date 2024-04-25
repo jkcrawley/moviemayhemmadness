@@ -4,6 +4,12 @@
 - Add Movie Section
     - addcrew.php: Added search function for adding cast and crew.
     - addcrew.php: Added a popup modal to add names that doesn't exist in database
+    - addmember.php: pops up in modal and allows user to add crew
+
+## WIP
+- Add Movie Section
+    - addmember.php: Page still adds duplicates to database
+    - addcrew.php: ability to add existing film makers to specified movie's cast/crew. Need to review and research PHP to learn how to store arrays into sessions.
 
 # v 0.2
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Generation Time: Apr 13, 2024 at 02:18 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.3.21
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 24, 2024 at 08:19 PM
+-- Server version: 8.3.0
+-- PHP Version: 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `actors`;
 CREATE TABLE IF NOT EXISTS `actors` (
-  `a_id` int(11) NOT NULL AUTO_INCREMENT,
+  `a_id` int NOT NULL AUTO_INCREMENT,
   `a_name` varchar(60) NOT NULL,
   PRIMARY KEY (`a_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -37,39 +37,31 @@ CREATE TABLE IF NOT EXISTS `actors` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `actor_movies`
+-- Table structure for table `crew_members`
 --
 
-DROP TABLE IF EXISTS `actor_movies`;
-CREATE TABLE IF NOT EXISTS `actor_movies` (
-  `am_actor` int(11) NOT NULL,
-  `am_movie` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `directors`
---
-
-DROP TABLE IF EXISTS `directors`;
-CREATE TABLE IF NOT EXISTS `directors` (
-  `d_id` int(11) NOT NULL AUTO_INCREMENT,
-  `d_name` varchar(60) NOT NULL,
-  PRIMARY KEY (`d_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+DROP TABLE IF EXISTS `crew_members`;
+CREATE TABLE IF NOT EXISTS `crew_members` (
+  `cr_id` int NOT NULL AUTO_INCREMENT,
+  `cr_fname` varchar(40) NOT NULL,
+  `cr_lname` varchar(60) NOT NULL,
+  `cr_dob` date NOT NULL,
+  PRIMARY KEY (`cr_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
--- Table structure for table `director_movies`
+-- Dumping data for table `crew_members`
 --
 
-DROP TABLE IF EXISTS `director_movies`;
-CREATE TABLE IF NOT EXISTS `director_movies` (
-  `dm_director` int(11) NOT NULL,
-  `dm_movie` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+INSERT INTO `crew_members` (`cr_id`, `cr_fname`, `cr_lname`, `cr_dob`) VALUES
+(1, 'christian', 'bale', '1974-01-30'),
+(2, 'heath', 'ledger', '1979-04-04'),
+(8, 'christopher', 'nolan', '1970-07-30'),
+(10, 'gary', 'oldman', '1958-04-21'),
+(11, 'maggie', 'gyllenhaal', '1977-11-16'),
+(12, 'aaron', 'eckhart', '1968-04-12'),
+(13, 'michael', 'caine', '1933-04-14'),
+(15, 'morgan', 'freeman', '1937-06-01');
 
 -- --------------------------------------------------------
 
@@ -79,13 +71,13 @@ CREATE TABLE IF NOT EXISTS `director_movies` (
 
 DROP TABLE IF EXISTS `movies`;
 CREATE TABLE IF NOT EXISTS `movies` (
-  `m_id` int(11) NOT NULL AUTO_INCREMENT,
+  `m_id` int NOT NULL AUTO_INCREMENT,
   `m_title` varchar(60) NOT NULL,
   `m_description` varchar(20000) NOT NULL,
   `m_release` date NOT NULL,
-  `m_budget` int(11) NOT NULL,
-  `m_boxoffice` int(11) NOT NULL,
-  `m_length` int(11) NOT NULL,
+  `m_budget` int NOT NULL,
+  `m_boxoffice` int NOT NULL,
+  `m_length` int NOT NULL,
   PRIMARY KEY (`m_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -97,38 +89,13 @@ CREATE TABLE IF NOT EXISTS `movies` (
 
 DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE IF NOT EXISTS `reviews` (
-  `r_id` int(11) NOT NULL,
-  `r_movie` int(11) NOT NULL,
-  `r_rating` int(11) NOT NULL,
+  `r_id` int NOT NULL,
+  `r_movie` int NOT NULL,
+  `r_rating` int NOT NULL,
   `r_summary` varchar(60) NOT NULL,
   `r_review` varchar(1000) NOT NULL,
   `r_date` date NOT NULL,
-  `r_user` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `screenwriters`
---
-
-DROP TABLE IF EXISTS `screenwriters`;
-CREATE TABLE IF NOT EXISTS `screenwriters` (
-  `s_id` int(11) NOT NULL AUTO_INCREMENT,
-  `s_screenwtier` varchar(60) NOT NULL,
-  PRIMARY KEY (`s_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `screenwriter_movies`
---
-
-DROP TABLE IF EXISTS `screenwriter_movies`;
-CREATE TABLE IF NOT EXISTS `screenwriter_movies` (
-  `sw_id` int(11) NOT NULL,
-  `sw_name` int(11) NOT NULL
+  `r_user` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -139,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `screenwriter_movies` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `u_id` int(11) NOT NULL AUTO_INCREMENT,
+  `u_id` int NOT NULL AUTO_INCREMENT,
   `u_username` varchar(60) NOT NULL,
   `u_password` varchar(100) NOT NULL,
   `u_email` varchar(80) NOT NULL,
