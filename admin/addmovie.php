@@ -49,12 +49,83 @@ if($_SESSION['userlevel'] != 'admin'){
 //create variable to store error messages
 $errMessage = '';
 
+//create variable to alter if upload is successful.
+$successMessage = '';
+
 //check form has been submitted
 if(isset($_POST['submitmovie'])){
 
+    //store user input in variables
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+
+    //create data for poster upload
+    $filename = $_FILES["imgupload"]["name"];
+    $tempname = $_FILES["imgupload"]["tmp_name"];
+    $poster = "../posters/" . $filename;
+
+    $releaseDate = date("Y-m-d", strtotime($_POST['release']));
+    $runtime = mysqli_real_escape_string($conn, $_POST['runtime']);
+    $budget = mysqli_real_escape_string($conn, $_POST['budget']);
+    $boxoffice = mysqli_real_escape_string($conn, $_POST['boxoffice']);
+    $premise = mysqli_real_escape_string($conn, $_POST['premise']);
+
+    //check to see if movie already exists by comparing title and date
+    $checkDB = "SELECT m_title, m_release FROM movies WHERE m_title = '$title' AND  m_release = '$releaseDate'";
+    $checkResult = mysqli_query($conn, $checkDB);
+    $checkrows = mysqli_fetch_array($checkResult, MYSQLI_ASSOC);
+
+    
+
     //check for all empty fields
-    if(empty($_POST['title']) || empty($_POST['imgupload']) || empty($_POST['release']) || empty($_POST['runtime']) || empty($_POST['budget']) || empty($_POST['boxoffice'])){
-        $errMessage = '<b style="color: red;">Fields are missing.</b>';
+    if(empty($_POST['title']) || empty($filename) || empty($_POST['release']) || empty($_POST['runtime']) || empty($_POST['budget']) || empty($_POST['boxoffice']) || empty($_POST['premise'])){
+        
+
+        if(empty($_POST['title'])){
+            $errMessage = '<b style="background-color: red;">You must enter title.</b>';
+        }
+
+        if(empty($filename)){
+            $errMessage = "<b style='background-color: red;'>You haven't chosen a poster.</b>";
+        }
+
+        if(empty($_POST['runtime'])){
+            $errMessage = "<b style='background-color: red;'>You must enter a run time.</b>";
+        }
+
+        if(empty($_POST['budget'])){
+            $errMessage = "<b style='background-color: red;'>You must enter a budget.</b>";
+        }
+
+        if(empty($_POST['boxoffice'])){
+            $errMessage = "<b style='background-color: red;'>You must enter a box office.</b>";
+        }
+
+        if(empty($_POST['premise'])){
+            $errMessage = "<b style='background-color: red;'>You must enter a premise.</b>";
+        } 
+
+    }  elseif($title == $checkrows['m_title'] and $releaseDate = $checkrows['m_release']){
+        $errMessage = "<b style='background-color: red;'>Movie already exists!</b>";
+    } else {
+        
+
+        $insertSQL = "INSERT INTO movies (m_title, m_poster, m_release, m_runtime, m_budget, m_boxoffice, m_premise) VALUES ('$title', '$filename', '$releaseDate', $runtime, $budget, $boxoffice, '$premise');";
+
+        if($conn->query($insertSQL) === TRUE){
+            $toggleDisplay = "style = 'display: none;";
+
+            $successMessage = "<div class='content-wrapper'><h2>Upload was successfull!</h2></div>";
+        } else {
+            echo "Error: " . $insertSQL . "<br />" , $conn->error;
+        }
+
+        if(move_uploaded_file($tempname, $poster)){
+        } else {
+            echo "<h3>Failed to upload image!</h3>";
+        }
+
+        
+
     }
 }
 
@@ -62,8 +133,9 @@ if(isset($_POST['submitmovie'])){
 
     </head>
     <body>
+        <?php echo $successMessage; ?>
        <div class='content-wrapper' <?php $toggleDisplay; ?>>
-       <form action='addmovie.php' method='post'>
+       <form action='addmovie.php' method='post' enctype='multipart/form-data'>
         <table>
             <tr>
                 <td colspan="2"><h1>Add Movie</h1></td>
@@ -107,11 +179,11 @@ if(isset($_POST['submitmovie'])){
                 <td colspan="2">&nbsp;</td>
             </tr>
             <tr>
-                <td><b>Summary:</b></td>
+                <td><b>Premise:</b></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2"><textarea style='width:400px; height: 100px;' name='summary' placeholder='Maximum 60 characters' required><?php if(isset($_SESSION['summary'])){ echo $_SESSION['summary']; }?></textarea></td>
+                <td colspan="2"><textarea style='width:400px; height: 100px;' name='premise' placeholder='Maximum 60 characters' required><?php if(isset($_SESSION['summary'])){ echo $_SESSION['summary']; }?></textarea></td>
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>

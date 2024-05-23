@@ -43,6 +43,7 @@ if($_SESSION['userlevel'] != 'admin'){
                 <li><a href='editmembers.php' target='iframe_content'>Edit Members</a></li>
                 <li><a href='newsletter.php' target='iframe_content'>Send Newsletter</a></li>
                 <li><a href='addmovie.php' target='iframe_content'>Add Movie</a></li>
+                <li><a href='addcrew.php' target='iframe_content'>Add Cast/Crew</a></li>
                 <li><a href='editmovie.php' target='iframe_content'>Edit Movie</a></li>
             </ul>
 

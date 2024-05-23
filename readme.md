@@ -8,6 +8,7 @@
 ## WIP
 - addcrew.php and add member.php will now be it's own tools.
 - Need to update tools navigation to include adding crew.
+- addmovie.php still a work in progress and does not yet insert new movies into database.
 
 # v 0.3
 
