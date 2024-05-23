@@ -1,3 +1,13 @@
+# Notes 5/23/2024
+
+## Completed
+- Add Movie section is now fully functinal. It allows to user to add a movie including title, run-time, budget, box office, premise, and able to upload poster along with movie.
+
+## WIP
+- addmovie.php: After a successful upload it display an error refering to the elseif statement on 107 as an undefined array element.
+- addcrew.php: Page will be revamped to a certain degree. The process will be for the user to search a movie they'd like to add a crew to and then display what role, actor, etc. Back and next buttons will be replaced by one submit button.
+
+
 # v 0.4
 
 ## Completed
