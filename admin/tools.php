@@ -2,6 +2,8 @@
 SESSION_START();
 ?>
 
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -18,6 +20,12 @@ SESSION_START();
 <?php
 
 $toggleDisplay = '';
+
+
+//check if user level exists and clear if it doesn't.
+if(!isset($_SESSION['userlevel'])){
+    $_SESSION['userlevel'] = '';
+}
 
 if($_SESSION['userlevel'] != 'admin'){
     $toggleDisplay = 'display: none;';

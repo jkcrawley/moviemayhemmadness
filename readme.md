@@ -1,3 +1,14 @@
+# v 0.4
+
+## Completed
+- Add Movie Section
+    - Revamped entire process of adding movie. Removed next button that goes to page to add cast and crew and replaced it with a submit button.
+    - Added upload button for adding posters to movie. Includes function to preview poster.
+
+## WIP
+- addcrew.php and add member.php will now be it's own tools.
+- Need to update tools navigation to include adding crew.
+
 # v 0.3
 
 ## Completed

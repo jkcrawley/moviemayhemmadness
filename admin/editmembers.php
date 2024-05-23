@@ -46,7 +46,9 @@ if($_POST['sort'] == 'request'){
 $resultsDisplay = '';
 
 if(!empty($_POST['search'])){
-    $usersSQL = "SELECT * FROM users WHERE u_username LIKE '%" . $_POST['search'] . "%';";
+    $searchResults = mysqli_escape_string($conn, $_POST['search']);
+
+    $usersSQL = "SELECT * FROM users WHERE u_username LIKE '%" . $searchResults . "%';";
     
     $resultsDisplay = "<h2 style='text-align: center;' >Search results for \"" . $_POST['search'] . "\"</h2>";
 

@@ -136,6 +136,21 @@ a{
 }
 
 
+input[type=submit]{
+    background-color: var(--fifth);
+    border: none;
+    padding: 18px 24px;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+input[type=submit]:hover{
+    background-color: var(--fourth);
+}
+
 input[type=text]{
     padding: 6px;
     width: 100%;
@@ -328,6 +343,34 @@ select{
 
 /* Add movie section */
 
+input[type='file']{
+    display: none;
+}
+
+.imgupload{
+    background-color: var(--fifth);
+    color: #bbb;
+    padding: 8px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.imgupload:hover{
+    background-color: var(--fourth);
+    color: #fff;
+}
+
+.imgupload:active{
+    font-size: .95rem;
+}
+
+#file-preview{
+    display: none;
+    margin: 20px;
+}
+
+/*add crew section */
 #modal{
     position: absolute;
     top: 50%;
@@ -375,5 +418,57 @@ select{
 }
 
 .crewsection{
+    display: none;
+}
+
+#crewbtn{
+    background-color: #999;
+    color: black;
+    cursor: pointer;
+    padding: 3px 8px;
+    margin: 8px;
+    width: auto;
+    display: inline-block;
+}
+
+#crewbtn:hover{
+    background-color: #bbb;
+}
+
+
+/* displaying added crew members */
+
+.crew-display{
+    float: right;
+    background-color: white;
+    width: 380px;
+    height: auto;
+    padding: 18px;
+    display: none;
+    margin-left: 12px;
+}
+
+.crew-roles{
+    padding: 20px;
+    text-align: center;
+}
+
+.crew-roles ul li{
+    list-style-type: none;
+}
+
+.directors{
+    display: none;
+}
+
+.actors{
+    display: none;
+}
+
+.producers{
+    display: none;
+}
+
+.screenwriters{
     display: none;
 }

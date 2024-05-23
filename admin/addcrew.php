@@ -29,34 +29,55 @@ $crewResult = mysqli_query($conn, $crewSQL);
 let crewArr = [];
 
 <?php
+
+//display results for film makers in database.
 while($crewRow= mysqli_fetch_array($crewResult, MYSQLI_ASSOC)){
    $c_id= $crewRow['cr_id'];
    $fname = $crewRow['cr_fname'];
    $lname = $crewRow['cr_lname'];
-   $fullname = "<button style='padding: 6px; margin: 8px; width: auto;'>" . $fname . ' ' . $lname . '</button>';
+   $fullname = $fname . ' ' . $lname;
 ?>
-crewArr.push("<?php echo $fullname; ?>")
+crewArr.push(["<?php echo $c_id; ?>", "<?php echo $fullname; ?>"]);
+
+
 
 
 <?php
 }
+
+
+?>
+
+//show and add crew to array
+
+function showCrew(){
+    const crewDis = document.querySelector('.crew-display');
+    let crewSection = document.querySelectorAll('.crewsection');
+    
+    for(let i = 0; i < crewSection.length; i++){
+        crewSection[i].style.display = 'none';
+    } 
+    document.getElementById('crewSearch').innerHTML = '';
+    crewDis.style.display = 'block';
+    document.getElementById('role').value = '';
+    document.getElementById('crewname').value = '';
+}
+
+
+<?php
+
+//populate added crew
+
+if(isset($_POST['addcrew'])){
+
+}
+
+
 ?>
 
 console.log(crewArr);
 
-function searchRes(){
-    const filtered = crewArr.filter(v => v.includes(document.getElementById('crewname').value));
 
-    console.log(filtered);
-
-    if(filtered.length === 0 || document.getElementById('crewname').value == '' || document.getElementById('crewname').value == ' '){
-        document.getElementById('crewSearch').innerHTML = "<i>No Results for </i>'" + document.getElementById('crewname').value + "'";
-    } else {
-        document.getElementById('crewSearch').innerHTML = filtered.join('<br />');
-    }
-
-    
-}
 
 
 
@@ -105,13 +126,29 @@ function searchRes(){
                     <tr>
 
                         <td><input type='button' class='backbtn' onclick="location.href='addmovie.php'" value='&larr; Back' /></td>
-                        <td><input type='submit' class='nextbtn' value='Next &rarr;'/>
+                        <td><input type='button' class='nextbtn' value='Next &rarr;'/>
                     </tr>
                 </table>
-                <div class='crew-display'>
 
-                </div>
             </form>
+            <div class='crew-display'>
+                <div class="crew-roles directors">
+                    <h3>Directors</h3>
+                    <ul id='directors-list'></ul>
+                </div>
+                <div class="crew-roles actors">
+                    <h3>Actors</h3>
+                    <ul id='actors-list'></ul>
+                </div>
+                <div class="crew-roles producers">
+                    <h3>Producers</h3>
+                    <ul id='producers-list'></ul>
+                </div>
+                <div class="crew-roles screenwriters">
+                    <h3>Screenwriters</h3>
+                    <ul id='screenwriters-list'></ul>
+                </div>
+            </div>
         </div>
         <div class="modal" id='modal'>
             <button id='modalbtn' onclick='closeModal(), location.reload()'>x</button>

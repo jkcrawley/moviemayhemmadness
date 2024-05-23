@@ -10,8 +10,8 @@ if(isset($_POST['addbtn'])){
     $crewResult = mysqli_query($conn, $crewSQL);
     $checkrow = mysqli_fetch_array($crewResult, MYSQLI_ASSOC);
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
+    $fname = mysqli_escape_string($conn, strtolower($_POST['fname']));
+    $lname = mysqli_escape_string($conn, strtolower($_POST['lname']));
     $birthdate = date('Y-m-d', strtotime($_POST['birthdate']));
 
 
