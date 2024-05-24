@@ -3,7 +3,7 @@
 
 To update security and further prevent sql injection, no further pages will be built until all existing pages are updated with prepared statements.
 
-###Pages to be updated for prepared statements
+### Pages to be updated for prepared statements
 - admin/addmovie.php
 - login.php
 - signup.php
