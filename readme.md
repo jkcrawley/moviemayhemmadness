@@ -1,3 +1,22 @@
+# Updated notes for 5/24/2024
+## Pages that have been updated and completed for prepared statements
+- admin/addmovie.php
+
+## Pages that still need to be updated
+- login.php
+- signup.php
+- admin/addmember.php
+- admin/useredit.php
+- admin/deleteuser.php
+
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+
+
 # Notes 5/24/2024
 ## No further pages to be developed until all SQL statements are revised as prepared statements.
 
