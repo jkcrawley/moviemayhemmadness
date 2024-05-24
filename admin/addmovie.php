@@ -109,18 +109,18 @@ if(isset($_POST['submit'])){
     } else {
         
 
-        $insertSQL = "INSERT INTO movies (m_title, m_poster, m_release, m_runtime, m_budget, m_boxoffice, m_premise) VALUES ('$title', '$filename', '$releaseDate', $runtime, $budget, $boxoffice, '$premise');";
+        $insertSQL = "INSERT INTO movies (m_title, m_poster, m_release, m_runtime, m_budget, m_boxoffice, m_premise) VALUES ('?', '?', '?', ?, ?, ?, '?');";
+        $stmt = mysqli_stmt_init($conn);
 
-        if($conn->query($insertSQL) === TRUE){
-            $toggleDisplay = "style = 'display: none;";
-
-            $successMessage = "<div class='content-wrapper'><h2>Upload was successfull!</h2></div>";
+        if(!mysqli_stmt_prepare($stmt, $insertSQL)){
+            echo "Error";
         } else {
-            echo "Error: " . $insertSQL . "<br />" , $conn->error;
+            mysqli_stmt_bind_param($stmt, "sssssss", $title, $poster, $releaseDate, $runtime, $budget, $boxoffice,  $premise);
+            mysqli_stmt_execute($stmt);
+
         }
 
         if(move_uploaded_file($tempname, $poster)){
-            echo "<h3>Upload failed!</h3>";
         } else {
             echo "<h3>Failed to upload image!</h3>";
         }
