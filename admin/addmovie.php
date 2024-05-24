@@ -53,7 +53,7 @@ $errMessage = '';
 $successMessage = '';
 
 //check form has been submitted
-if(isset($_POST['submitmovie'])){
+if(isset($_POST['submit'])){
 
     //store user input in variables
     $title = mysqli_real_escape_string($conn, $_POST['title']);
@@ -120,6 +120,7 @@ if(isset($_POST['submitmovie'])){
         }
 
         if(move_uploaded_file($tempname, $poster)){
+            echo "<h3>Upload failed!</h3>";
         } else {
             echo "<h3>Failed to upload image!</h3>";
         }
@@ -190,7 +191,7 @@ if(isset($_POST['submitmovie'])){
             </tr>
             <tr>
                 <td colspan='2' style='text-align: right;'>
-                    <input type='submit' class='subbtn' name='submitmovie' value='Add Movie'/>
+                    <input type='submit' class='subbtn' name='submit' value='Add Movie'/>
                 </td>
             </tr>
         </table>

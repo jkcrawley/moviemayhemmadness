@@ -136,7 +136,7 @@ a{
 }
 
 
-input[type=submit]{
+.subbtn{
     background-color: var(--fifth);
     border: none;
     padding: 18px 24px;
@@ -147,7 +147,7 @@ input[type=submit]{
     transition: .2s ease-in-out;
 }
 
-input[type=submit]:hover{
+subbtn:hover{
     background-color: var(--fourth);
 }
 

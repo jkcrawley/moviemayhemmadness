@@ -1,3 +1,8 @@
+# Notes 5/24/2024
+## No further pages to be developed until all SQL statements are revised as prepared statements.
+
+To update security and further prevent sql injection, no further pages will be built until all existing pages are updated with prepared statements.
+
 # Notes 5/23/2024
 
 ## Completed
