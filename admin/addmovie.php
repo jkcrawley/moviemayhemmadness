@@ -70,7 +70,7 @@ if(isset($_POST['submitmovie'])){
     $premise = mysqli_real_escape_string($conn, $_POST['premise']);
 
     //check to see if movie already exists by comparing title and date
-    $checkDB = "SELECT m_title, m_release FROM movies WHERE m_title = '$title' AND  m_release = '$releaseDate'";
+    $checkDB = "SELECT m_title, m_release FROM movies WHERE m_title = '$title' AND  m_release = '$releaseDate';";
     $checkResult = mysqli_query($conn, $checkDB);
     $checkrows = mysqli_fetch_array($checkResult, MYSQLI_ASSOC);
 
@@ -104,7 +104,7 @@ if(isset($_POST['submitmovie'])){
             $errMessage = "<b style='background-color: red;'>You must enter a premise.</b>";
         } 
 
-    }  elseif($title == $checkrows['m_title'] and $releaseDate = $checkrows['m_release']){
+    }  elseif($checkrows > 0){
         $errMessage = "<b style='background-color: red;'>Movie already exists!</b>";
     } else {
         
@@ -190,7 +190,7 @@ if(isset($_POST['submitmovie'])){
             </tr>
             <tr>
                 <td colspan='2' style='text-align: right;'>
-                    <input type='submit' name='submitmovie' value='Add Movie'/>
+                    <input type='submit' class='subbtn' name='submitmovie' value='Add Movie'/>
                 </td>
             </tr>
         </table>
