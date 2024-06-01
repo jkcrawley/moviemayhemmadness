@@ -22,7 +22,6 @@ include('../includes/config.php');
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
         <link rel="stylesheet" href="../css/admin.css">
         
-
 <?php
 
 
@@ -56,7 +55,7 @@ $successMessage = '';
 if(isset($_POST['submit'])){
 
     //store user input in variables
-    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $title = mysqli_real_escape_string($conn, ucwords($_POST['title']));
 
     //create data for poster upload
     $filename = $_FILES["imgupload"]["name"];
@@ -109,14 +108,16 @@ if(isset($_POST['submit'])){
     } else {
         
 
-        $insertSQL = "INSERT INTO movies (m_title, m_poster, m_release, m_runtime, m_budget, m_boxoffice, m_premise) VALUES ('?', '?', '?', ?, ?, ?, '?');";
+        $insertSQL = "INSERT INTO movies (m_title, m_poster, m_release, m_runtime, m_budget, m_boxoffice, m_premise) VALUES (?, ?, ?, ?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $insertSQL)){
             echo "Error";
         } else {
-            mysqli_stmt_bind_param($stmt, "sssssss", $title, $poster, $releaseDate, $runtime, $budget, $boxoffice,  $premise);
+            mysqli_stmt_bind_param($stmt, "sssssss", $title, $filename, $releaseDate, $runtime, $budget, $boxoffice,  $premise);
             mysqli_stmt_execute($stmt);
+            $toggleDisplay = "style='display: none;";
+            $successMessage = "<div class='content-wrapper' style='flex-direction: column; justify-content: center; align-items: center;'><h2 style='display: block;'>$title has been added to the database!</h2><p style='display: block;'><a href='addmovie.php'>&larr; Add another movie.</p></div>";
 
         }
 

@@ -3,6 +3,21 @@ SESSION_START();
 
 include('../includes/config.php');
 
+
+//push movies table into JSON object
+include("../scripts/php-script.php");
+
+//retrieve Movies object
+$json_movie_data = file_get_contents("movie-data.json");
+
+//convert movies object to array
+$movies = json_decode($json_movie_data, JSON_OBJECT_AS_ARRAY);
+
+//retrieve film makers/actors/etc.
+$json_crew_data = file_get_contents("crew-data.json");
+$filmmakers = json_decode($json_crew_data, JSON_OBJECT_AS_ARRAY);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -20,80 +35,42 @@ include('../includes/config.php');
         <link rel="stylesheet" href="../css/admin.css">
     </head>
 
-<?php
-$crewSQL = "SELECT * FROM crew_members";
-$crewResult = mysqli_query($conn, $crewSQL);
-?>
 
-<script defer>
-let crewArr = [];
-
-<?php
-
-//display results for film makers in database.
-while($crewRow= mysqli_fetch_array($crewResult, MYSQLI_ASSOC)){
-   $c_id= $crewRow['cr_id'];
-   $fname = $crewRow['cr_fname'];
-   $lname = $crewRow['cr_lname'];
-   $fullname = $fname . ' ' . $lname;
-?>
-crewArr.push(["<?php echo $c_id; ?>", "<?php echo $fullname; ?>"]);
-
-
-
-
-<?php
-}
-
-
-?>
-
-//show and add crew to array
-
-function showCrew(){
-    const crewDis = document.querySelector('.crew-display');
-    let crewSection = document.querySelectorAll('.crewsection');
-    
-    for(let i = 0; i < crewSection.length; i++){
-        crewSection[i].style.display = 'none';
-    } 
-    document.getElementById('crewSearch').innerHTML = '';
-    crewDis.style.display = 'block';
-    document.getElementById('role').value = '';
-    document.getElementById('crewname').value = '';
-}
-
-
-<?php
-
-//populate added crew
-
-if(isset($_POST['addcrew'])){
-
-}
-
-
-?>
-
-console.log(crewArr);
-
-
-
-
-
-</script>
     <body>
         <div class="content-wrapper">
             <form action="addcrew.php" method="post">
+                
                 <table>
 
                     <tr>
                         <td colspan="2" align="center"><h1>Add Cast &amp; Crew</h1></td>
                     </tr>
+                    
                     <tr>
-                        <td><b><label for="role"><b>Select Role:  </b></label></td>
+                        <td><p id='text-test'></p></td>
+                    </tr>
+                    <tr class='movierow'>
+                        <td><label for='searchmovie'><b>Search Movie:</b></label></td>
+                        <td><input type='text' name='searchmovie' id='searchmovie' class='searchmovie' onkeyup='movieRes()'/></td>
+                    </tr>
+
+                    <tr class='moviedisplay'>
+                        <td colspan='2' style='text-align: center;'>
+                            <p id='movielist'></p>
+                            <p id='movieinput'></p>
+                            <p id='crewinput'>
+                                <input type='hidden' name='crewid' />
+                                <input type='hidden' name='crewrole' />
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr class='roleselect'>
                         <td>
-                            <select name='role'  onchange='roleSelect()' id='role'>
+                            <label for="role"><b>Select Role:  </b></label>
+                        </td>
+                        <td>
+                            <select name='role' onchange='roleSelect()' id='role'>
                                 <option value=''>-</option>
                                 <option value='director'>Director</option>
                                 <option value='actor'>Actor</option>
@@ -102,6 +79,7 @@ console.log(crewArr);
                             </select>
                         </td>
                     </tr>
+
                     <tr class='crewsection'>
                         <td><b><label for="fname">Search for Name:  </label></b></td>
                         <td><input type='text' name='crewname' id='crewname' onkeyup='searchRes()'/></td>
@@ -115,7 +93,7 @@ console.log(crewArr);
                         <td colspan='2'>&nbsp;</td>
                     </tr>
                     <tr class='crewsection'>
-                        <td colspan='2'>Can't find actor, director, producer, etc.? <a href="addmember.php" target="inewmember" onclick='openModal()'>Add Them here</a>
+                        <td colspan='2'>Can't find actor, director, producer, etc.? <a href="addmember.php" target="inewmember" onclick='openModal()'>Add Them here</a></td>
                     </tr>
                     <tr>
                         <td colspan='2'>&nbsp;</td>
@@ -125,13 +103,16 @@ console.log(crewArr);
                     </tr>
                     <tr>
 
-                        <td><input type='button' class='backbtn' onclick="location.href='addmovie.php'" value='&larr; Back' /></td>
-                        <td><input type='button' class='nextbtn' value='Next &rarr;'/>
+                        <td colspan='2'>
+                            <input type='reset' name='reset' class='subbtn' />
+                            <input type='submit' name='submit' id='submit' class='subbtn' value='Add Cast'/>
+                        </td>
                     </tr>
                 </table>
 
             </form>
             <div class='crew-display'>
+                <h2 id='movietitle' style='text-align: center;'></h2>
                 <div class="crew-roles directors">
                     <h3>Directors</h3>
                     <ul id='directors-list'></ul>
@@ -155,7 +136,22 @@ console.log(crewArr);
             <iframe name='inewmember' id='inewmember' class='inewmember' title='New Member Window'></iframe>
         </div>
         <div class="overlay" onclick="closeModal(), location.reload()"></div>
-        
+
+
+<script defer>
+
+//pass PHP arrays to Javascript objects
+
+let movies = <?php echo json_encode($movies); ?>;
+let crew = <?php echo json_encode($filmmakers); ?>;
+
+console.log(crew);
+
+//create array to be prepared for JSON
+let crewObj = [];
+
+
+</script>
         <script src="../scripts/admin.js" async defer></script>
     </body>
 </html>

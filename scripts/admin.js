@@ -22,6 +22,43 @@
 
 
 
+function movieRes(){
+    let buttonArr = [];
+    for(let i = 0; i < movies.length; i++){
+        if(movies[i].m_title.toLowerCase().indexOf(document.getElementById('searchmovie').value.toLowerCase()) !== -1){
+            
+            
+            let movieBtn = `<button name='moviebtn' type='button' id='addmovie' onclick="addMovie('${movies[i].m_id}', '${movies[i].m_title}', '${movies[i].m_title}', '${movies[i].m_release}')" style='margin-bottom: 18px;'  value='${movies[i].m_id}'> ${movies[i].m_title} (${movies[i].m_release.slice(0, 4)}) </button>`;
+            buttonArr.push(movieBtn);
+        }
+    }
+
+    if(document.getElementById('searchmovie').value === ''){
+        buttonArr = [];
+    }
+
+    document.getElementById('movielist').innerHTML = buttonArr.join('<br />');
+
+}
+
+
+
+function addMovie(id, arrName, disName, year){
+    document.querySelector('.movierow').style.display = 'none';
+    document.querySelector('.moviedisplay').style.display = 'none';
+    document.querySelector('.roleselect').style.display = 'table-row';
+
+    //create form input to submit movie id
+    const movieid = `<input type='hidden' name='movieid' id='movieid' value='${id}' />`;
+
+    document.getElementById('movieinput').innerHTML = movieid;
+
+    //display movie section
+    const crewDisplay = document.querySelector('.crew-display');
+    crewDisplay.style.display = 'block';
+    document.getElementById('movietitle').innerHTML = `${disName} (${year.slice(0,4)})`;
+}
+
 //add crew member modal
 
 function openModal(){
@@ -60,27 +97,28 @@ function roleSelect(){
 
 
 
-//array to be filled by which ever crew member the user decides to add.
-let crewAdded = [];
-
 
 //return results for crew member search
 function searchRes(){
-
-    let returnArr = [];
     let returnDis = [];
+    let crewName = [];
 
-    for (i = 0; i < crewArr.length; i++){
+    for (let i = 0; i < crew.length; i++){
+        crewName.push(crew[i].cr_fname + ' ' + crew[i].cr_lname);
+
+        
+            
+
+            if(crewName[i].toLowerCase().indexOf(document.getElementById('crewname').value.toLowerCase()) !== -1){
+
+                let returnStyle = `<button type='button' name='addcrew' id='crewbtn' onclick="addCrew('${crew[i].cr_id}', '${crewName[i]}')">${crewName[i]}</button>`;
+    
+                returnDis.push(returnStyle);
+    
+            }
         
 
-        if(crewArr[i][1].indexOf(document.getElementById('crewname').value.toLowerCase()) !== -1){
-            returnArr.push(crewArr[i][1]);
-
-            let returnStyle = `<button type='button' id='crewbtn' onclick="addCrew('${crewArr[i][0]}', '${crewArr[i][1]}')">${crewArr[i][1]}</button>`;
-
-            returnDis.push(returnStyle);
-
-        }
+        
         
     }
     
@@ -93,67 +131,58 @@ function searchRes(){
 
 
 
-
-//add chosen crew members to new array by clicking their names
 function addCrew(id, name){
+    let crewRole = document.getElementById('role').value;
+    const movieid = document.getElementById('movieid').value;
 
-    crewAdded.push([document.getElementById('role').value, id, name]);
+    //add new items to object
+    crewObj.push({mc_movie: movieid, mc_crew: id, mc_role: crewRole});
 
-    console.log(crewAdded);
+    //check if directors have been added
+    let directorsArr = crewObj.filter(artist => artist.mc_role == 'director');
 
-    //reset form
+    const dirResults = crew.filter((el) => {
+        return directorsArr.some((f) => {
+            return f.mc_crew === el.cr_id;
+        });
+    });
+    
+    if(dirResults.length > 0){
+        document.querySelector('.directors').style.display = 'block';
+        let disDirectors = [];
 
-    document.getElementById('role').value = '';
-    document.getElementById('crewname').value = '';
-    document.getElementById('crewSearch').innerHTML = '';
-    document.querySelector('.crewsection').style.display = 'none';
-
-    //display added crew
-    const crewDisplay = document.querySelector('.crew-display');
-    crewDisplay.style.display = 'block';
-
-    let crewMember = '';
-    let crewRole = '';
-
-    //loop through crew array
-    for (let i = 0; i < crewAdded.length; i++){
-        
-        //display crew lists
-
-        
-        crewMember = crewAdded[i][2];
-        
-        if(crewAdded[i][0] === 'director'){
-            const dirList = document.querySelector('.directors');
-            dirList.style.display = 'block';
-            crewRole = 'directors-list';
+        for(let i = 0; i < dirResults.length; i++){
+            disDirectors.push(`<li>${dirResults[i].cr_fname} ${dirResults[i].cr_lname}</li>`);
         }
-
-        if(crewAdded[i][0] === 'actor'){
-            const dirList = document.querySelector('.actors');
-            dirList.style.display = 'block';
-            crewRole = 'actors-list';
-        }
+        document.getElementById('directors-list').innerHTML = disDirectors.join(' ');
         
-        if(crewAdded[i][0] === 'producer'){
-            const dirList = document.querySelector('.producers');
-            dirList.style.display = 'block';
-            crewRole = 'producers-list';
-        }
-
-        if(crewAdded[i][0] === 'screenwriter'){
-            const dirList = document.querySelector('.screenwriters');
-            dirList.style.display = 'block';
-            crewRole = 'screenwriters-list';
-        }
-
     }
 
-    //append list elements to be shown
-    const node = document.createElement("li");
-    const textNode = document.createTextNode(crewMember);
-    node.appendChild(textNode);
-    document.getElementById(crewRole).appendChild(node);
+    //check if actors have been added
+    const actorsArr = crewObj.filter(artist => artist.mc_role == 'actor');
+
+    const actResults = crew.filter((el) => {
+        return actorsArr.some((f) => {
+            return f.mc_crew === el.cr_id;
+        });
+    });
     
+    if(actResults.length > 0){
+        document.querySelector('.actors').style.display = 'block';
+        let disActors = [];
+        console.log(crewObj);
+        for(let i = 0; i < actResults.length; i++){
+            disActors.push(`<li>${actResults[i].cr_fname} ${actResults[i].cr_lname}</li>`);
+        }
+        document.getElementById('actors-list').innerHTML = disActors.join(' ');
+        
+    }
+    console.log(crewObj);
+
+    crewRole = '';
+    document.getElementById('crewSearch').innerHTML = '';
+    document.getElementById('crewname').value = '';
+    document.getElementById('role').value = '';
 }
+
 

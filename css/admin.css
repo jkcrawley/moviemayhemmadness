@@ -138,16 +138,17 @@ a{
 
 .subbtn{
     background-color: var(--fifth);
-    border: none;
+    border: 1px solid #777;
     padding: 18px 24px;
     color: white;
     font-weight: bold;
     width: 100%;
     cursor: pointer;
     transition: .2s ease-in-out;
+    margin-bottom: 12px;
 }
 
-subbtn:hover{
+.subbtn:hover{
     background-color: var(--fourth);
 }
 
@@ -318,7 +319,7 @@ select{
 
 
 .content-wrapper table tr td{
-    padding: 6px;
+    padding: 20px 6px;
 }
 
 .content-wrapper a{
@@ -342,6 +343,18 @@ select{
 }
 
 /* Add movie section */
+
+#addmovie{
+    background-color: #004400;
+    width: auto;
+    border: none;
+    transition: all .2s ease-in-out;
+    border-radius: 25px;
+}
+
+#addmovie:hover{
+    background-color: #007700;
+}
 
 input[type='file']{
     display: none;
@@ -438,6 +451,7 @@ input[type='file']{
 
 /* displaying added crew members */
 
+
 .crew-display{
     float: right;
     background-color: white;
@@ -446,6 +460,10 @@ input[type='file']{
     padding: 18px;
     display: none;
     margin-left: 12px;
+}
+
+.roleselect{
+    display: none;
 }
 
 .crew-roles{
