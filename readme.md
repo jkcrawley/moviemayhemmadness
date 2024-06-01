@@ -1,3 +1,8 @@
+# Notes 6/1/2024
+
+## Completed
+- Converted all data to json on addcrew.php
+
 # Notes 5/23/2024
 
 ## Completed
