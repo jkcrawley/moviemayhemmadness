@@ -6,25 +6,40 @@ include('../includes/config.php');
 $disErr = '';
 
 if(isset($_POST['addbtn'])){
-    $crewSQL = "SELECT * FROM crew_members;";
-    $crewResult = mysqli_query($conn, $crewSQL);
-    $checkrow = mysqli_fetch_array($crewResult, MYSQLI_ASSOC);
 
     $fname = mysqli_escape_string($conn, strtolower($_POST['fname']));
     $lname = mysqli_escape_string($conn, strtolower($_POST['lname']));
     $birthdate = date('Y-m-d', strtotime($_POST['birthdate']));
 
+    $crewSQL = "SELECT * FROM crew_members WHERE cr_fname = '$fname' AND cr_lname = '$lname' AND cr_dob = '$birthdate'";
+    $crewResult = $conn->query($crewSQL);
+    $checkrow = mysqli_fetch_array($crewResult, MYSQLI_ASSOC);
+
 
 //check if film maker already exists and all fields have been filled
-    if($fname == $checkrow['cr_fname'] && $lname == $checkrow['cr_lname'] && $birthdate == $checkrow['cr_dob']){
+    if($checkrow['cr_fname'] == $fname && $checkrow['cr_lname'] == $lname && $checkrow['cr_dob'] == $birthdate){
         $disErr = "<tr><td colspan='2'><p style='background-color: red;'>Film maker already exists in database.</p></td></tr>";
     } else if (empty($fname) || empty($lname) || empty($birthdate)){
         $disErr = "<tr><td colspan='2'><p style='background-color:red;'>Missing Fields</p></td></tr>";
     } else {
         $insertSQL = "INSERT INTO crew_members (cr_fname, cr_lname, cr_dob) VALUES ('$fname', '$lname', '$birthdate');";
+        
 
         if($conn->query($insertSQL) === TRUE){
             $disErr = "<tr><td colspan='2'><p><b>Film maker has been successfully added to database!</b></p></td></tr>";
+
+            $jsonSql = "SELECT * FROM crew_members WHERE cr_fname = '$fname' AND cr_lname = '$lname' AND cr_dob = '$birthdate'";
+            $result = $conn -> query($jsonSql);
+
+            $row = $result -> fetch_assoc();
+
+            $crewJson = file_get_contents("../json/crew-members.json");
+            $crewArr = json_decode($crewJson, JSON_OBJECT_AS_ARRAY);
+
+            $crewArr[] = array('cr_id' => $row['cr_id'], 'cr_fname' => $row['cr_fname'], 'cr_lname' => $row['cr_lname'], 'cr_dob' => $row['cr_dob']);
+
+            $encoded_crew = json_encode($crewArr, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            file_put_contents('../json/crew-members.json', $encoded_crew);
         } else {
             echo "Error: " . $insertSQL . "<br />" , $conn->error;
         }

@@ -136,7 +136,10 @@ function addCrew(id, name){
     const movieid = document.getElementById('movieid').value;
 
     //add new items to object
-    crewObj.push({mc_movie: movieid, mc_crew: id, mc_role: crewRole});
+    crewObj.push({"mc_movie": movieid, "mc_crew": id, "mc_role": crewRole});
+
+
+
 
     //check if directors have been added
     let directorsArr = crewObj.filter(artist => artist.mc_role == 'director');
@@ -158,6 +161,10 @@ function addCrew(id, name){
         
     }
 
+
+
+
+
     //check if actors have been added
     const actorsArr = crewObj.filter(artist => artist.mc_role == 'actor');
 
@@ -177,12 +184,26 @@ function addCrew(id, name){
         document.getElementById('actors-list').innerHTML = disActors.join(' ');
         
     }
-    console.log(crewObj);
 
+
+    //reset inputs and displayed data
     crewRole = '';
     document.getElementById('crewSearch').innerHTML = '';
     document.getElementById('crewname').value = '';
     document.getElementById('role').value = '';
+    //console.log(crewObj);
+    fetch("../json/javascript-json.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": JSON.stringify(crewObj)
+    }).then(function(response){
+        return response.text();
+    }).then(function(data){
+        console.log(data);
+    }) 
+ 
 }
 
-
+  

@@ -1,5 +1,13 @@
 <?php
 
+//Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+//check connection
+if(mysqli_connect_error()){
+    die("database connection failed: " . mysqli_connect_error());
+} 
+
 //movie data
 
 $moviesSQL = "SELECT * FROM movies";
@@ -10,7 +18,7 @@ while($movie = $movieResults->fetch_assoc()){
 }
 
 $encoded_movies = json_encode($movies, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-file_put_contents('movie-data.json', $encoded_movies);
+file_put_contents('../json/movies.json', $encoded_movies);
 
 
 //crew data
@@ -23,5 +31,5 @@ while($crew = $crewResults->fetch_assoc()){
 }
 
 $encoded_crew = json_encode($crewMembers, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-file_put_contents('crew-data.json', $encoded_crew);
+file_put_contents('../json/crew-members.json', $encoded_crew);
 ?>

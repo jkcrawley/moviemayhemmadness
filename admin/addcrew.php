@@ -5,17 +5,45 @@ include('../includes/config.php');
 
 
 //push movies table into JSON object
-include("../scripts/php-script.php");
+include("../json/php-json.php");
+
 
 //retrieve Movies object
-$json_movie_data = file_get_contents("movie-data.json");
+$json_movie_data = file_get_contents("../json/movies.json");
 
 //convert movies object to array
 $movies = json_decode($json_movie_data, JSON_OBJECT_AS_ARRAY);
 
 //retrieve film makers/actors/etc.
-$json_crew_data = file_get_contents("crew-data.json");
+$json_crew_data = file_get_contents("../json/crew-members.json");
 $filmmakers = json_decode($json_crew_data, JSON_OBJECT_AS_ARRAY);
+
+$textTest = '';
+
+
+//movie crew json
+$movieCrew_data = file_get_contents("../json/movie-crew.json");
+$crewArr = json_decode($movieCrew_data, JSON_OBJECT_AS_ARRAY);
+
+//print_r($crewArr);
+
+if(isset($_POST['submit'])){
+    
+    
+
+    //$textTest = var_dump($crewArr);
+
+    for($x = 0; $x < count($crewArr); $x++){
+        
+    }
+
+    
+
+    //for($x = 0; $x < 3; $x++){
+        //$text = print($crewArr[$x]['mc_role']) . "<br />";
+    //}
+}
+
 
 
 ?>
@@ -47,10 +75,10 @@ $filmmakers = json_decode($json_crew_data, JSON_OBJECT_AS_ARRAY);
                     </tr>
                     
                     <tr>
-                        <td><p id='text-test'></p></td>
+                        <td colspan='2'><p id='text-test'><?php echo $textTest; ?></p></td>
                     </tr>
                     <tr class='movierow'>
-                        <td><label for='searchmovie'><b>Search Movie:</b></label></td>
+                        <td><label for='searchmovie'><b>Search for Movie:</b></label></td>
                         <td><input type='text' name='searchmovie' id='searchmovie' class='searchmovie' onkeyup='movieRes()'/></td>
                     </tr>
 
@@ -104,6 +132,7 @@ $filmmakers = json_decode($json_crew_data, JSON_OBJECT_AS_ARRAY);
                     <tr>
 
                         <td colspan='2'>
+                            <input type='hidden' name='crewobj' />
                             <input type='reset' name='reset' class='subbtn' />
                             <input type='submit' name='submit' id='submit' class='subbtn' value='Add Cast'/>
                         </td>
@@ -138,20 +167,23 @@ $filmmakers = json_decode($json_crew_data, JSON_OBJECT_AS_ARRAY);
         <div class="overlay" onclick="closeModal(), location.reload()"></div>
 
 
-<script defer>
+        <script defer>
 
-//pass PHP arrays to Javascript objects
+        //pass PHP arrays to Javascript objects
 
-let movies = <?php echo json_encode($movies); ?>;
-let crew = <?php echo json_encode($filmmakers); ?>;
+        let movies = <?php echo json_encode($movies); ?>;
+        let crew = <?php echo json_encode($filmmakers); ?>;
 
-console.log(crew);
+        console.log(movies);
+        console.log(crew);
 
-//create array to be prepared for JSON
-let crewObj = [];
+        //create array to be prepared for JSON
+        let crewObj = [];
 
 
-</script>
-        <script src="../scripts/admin.js" async defer></script>
+        </script>
+        <script src="../scripts/admin.js" async defer>
+          
+        </script>
     </body>
 </html>
