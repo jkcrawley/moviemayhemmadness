@@ -1,8 +1,11 @@
 //Add movie section
 
     //file upload preview
+    let input = '';
 
-    const input = document.getElementById('imgupload');
+    if(document.getElementById('imgupload')){
+        input = document.getElementById('imgupload');
+    
 
     const previewPhoto = () => {
         const file = input.files;
@@ -19,7 +22,7 @@
     }
 
     input.addEventListener('change', previewPhoto);
-
+    }
 
 
 function movieRes(){

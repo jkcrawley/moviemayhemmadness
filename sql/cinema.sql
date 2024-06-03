@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: May 23, 2024 at 11:58 PM
+-- Generation Time: Jun 03, 2024 at 05:13 AM
 -- Server version: 11.3.2-MariaDB
 -- PHP Version: 8.2.18
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `crew_members` (
   `cr_lname` varchar(60) NOT NULL,
   `cr_dob` date NOT NULL,
   PRIMARY KEY (`cr_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `crew_members`
@@ -56,7 +56,11 @@ INSERT INTO `crew_members` (`cr_id`, `cr_fname`, `cr_lname`, `cr_dob`) VALUES
 (18, 'paul', 'verhoeven', '1938-07-18'),
 (19, 'edward', 'nuemeier', '1957-08-24'),
 (20, 'michael', 'miner', '1933-03-23'),
-(21, 'peter', 'weller', '1947-06-24');
+(21, 'peter', 'weller', '1947-06-24'),
+(22, 'cillian', 'murphey', '1976-05-25'),
+(58, 'zoe', 'kravitz', '1988-12-01'),
+(57, 'matt', 'reeves', '1966-04-27'),
+(56, 'robert', 'pattinson', '1986-05-13');
 
 -- --------------------------------------------------------
 
@@ -75,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `m_runtime` int(11) NOT NULL,
   `m_poster` varchar(255) NOT NULL,
   PRIMARY KEY (`m_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `movies`
@@ -83,6 +87,12 @@ CREATE TABLE IF NOT EXISTS `movies` (
 
 INSERT INTO `movies` (`m_id`, `m_title`, `m_premise`, `m_release`, `m_budget`, `m_boxoffice`, `m_runtime`, `m_poster`) VALUES
 (2, 'The Dark Knight', 'The plot follows the vigilante Batman, police lieutenant James Gordon, and district attorney Harvey Dent, who form an alliance to dismantle organized crime in Gotham City. Their efforts are derailed by the Joker, an anarchistic mastermind who seeks to test how far Batman will go to save the city from chaos.', '2008-07-18', 185000000, 1006000000, 152, '818hyvdVfvL._AC_UF894,1000_QL80_.jpg'),
+(29, 'Furiosa', 'Snatched from the Green Place of Many Mothers, young Furiosa falls into the hands of a great biker horde led by the warlord Dementus. Sweeping through the Wasteland, they come across the Citadel, presided over by the Immortan Joe. As the two tyrants fight for dominance, Furiosa soon finds herself in a nonstop battle to make her way home.', '2024-05-24', 168000000, 32000000, 148, 'furiosa.jpg'),
+(27, 'Civil War', 'In a dystopian future America, a team of military-embedded journalists races against time to reach Washington, D.C., before rebel factions descend upon the White House.', '2024-04-12', 50000000, 112000000, 109, 'civilwar.jpg'),
+(28, 'The Batman', 'Batman ventures into Gotham City\\\'s underworld when a sadistic killer leaves behind a trail of cryptic clues. As the evidence begins to lead closer to home and the scale of the perpetrator\\\'s plans become clear, he must forge new relationships, unmask the culprit and bring justice to the abuse of power and corruption that has long plagued the metropolis.', '2022-03-04', 185000000, 772245583, 176, 'thebatman.jpg'),
+(20, 'If', 'After discovering she can see everyone\'s imaginary friends, a girl embarks on a magical adventure to reconnect forgotten IFs with their kids.', '2024-05-17', 185000000, 127000000, 104, 'ifmovie.jpg'),
+(21, 'The Fall Guy', 'A down-and-out stuntman must find the missing star of his ex-girlfriend\\\'s blockbuster film.', '2024-05-03', 125000000, 130100000, 125, 'fallguy.jpg'),
+(10, 'Dune part 2', 'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the universe, he must prevent a terrible future only he can foresee.', '2024-03-01', 190000000, 711800000, 167, 'jKE4GGhhSLf4HR2fpD9Ayo2UtAD.jpg'),
 (7, 'Robocop', 'RoboCop takes place in Detroit in 2043, in a near-apocalyptic, crime-ridden future. The movie is about a terminally wounded police officer, Alex Murphy, who is murdered by a gang and then revived as a cyborg law enforcer by the megacorporation Omni Consumer Products (OCP). OCP wins a contract from the city government to privatize the police force and uses Murphy\'s body to test their untested RoboCop prototype. However, RoboCop turns on OCP when he learns of their evil plans.', '1987-07-17', 13700000, 53400000, 103, 'MV5BZWVlYzU2ZjQtZmNkMi00OTc3LTkwZmYtZDVjNmY4OWFmZGJlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg'),
 (8, 'Robocop', 'Set in 2028, a detective becomes critically injured and is turned into a cyborg police officer whose programming blurs the line between man and machine.', '2014-02-12', 130000000, 242600000, 108, 'MV5BMjAyOTUzMTcxN15BMl5BanBnXkFtZTgwMjkyOTc1MDE@._V1_.jpg'),
 (9, 'Dune', 'Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people.', '2021-10-21', 165000000, 407500000, 155, '61QbqeCVm0L.jpg');

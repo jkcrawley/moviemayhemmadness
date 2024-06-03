@@ -198,6 +198,8 @@ if(isset($_POST['submit'])){
         </table>
         </form>
        </div>
-       <script src="../scripts/admin.js" async defer></script>
+       <script src="../scripts/admin.js" async defer>
+            
+       </script>
     </body>
 </html>
