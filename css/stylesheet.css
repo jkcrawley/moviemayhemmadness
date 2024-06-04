@@ -37,6 +37,21 @@ html{
     src: url('../fonts/Poppins-Regular.ttf')
 }
 
+@font-face{
+    font-family: melmaline;
+    src: url('../fonts/MelmaLine.ttf')
+}
+
+@font-face{
+    font-family: melmacracked;
+    src: url('../fonts/MelmaCracked.ttf')
+}
+
+@font-face{
+    font-family: melma;
+    src: url('../fonts/Melma.ttf')
+}
+
 /* main styles */
 
 body{
@@ -70,4 +85,242 @@ a{
 
 a:hover{
     color: var(--second);
+}
+
+/*landing page*/
+
+.wrapper{
+    position: relative;
+    margin: auto;
+}
+
+.hero{
+    width: 1976px;
+    height: 900px;
+    margin: auto;
+    display: block;
+    margin-top: 95px;
+    padding: 0;
+    color: white;
+    background-image: url('../images/hero-img.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero h1{
+    display: inline-block;
+    padding-left: 140px;
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    line-height: 3.5rem;
+    font-family: melmacracked;
+    text-shadow: 2px 7px #000000;
+}
+
+.hero h2{
+    padding-left: 140px;
+    margin-top: 40px;
+    text-shadow: 2px 7px #000000;
+    font-family: melma;
+}
+
+
+/*nav*/
+.desktop-nav{
+    color: white;
+    padding: 35px;
+    top: 0;
+    background-color: black;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.desktop-nav ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 25px;
+    float: right;
+    display: table;
+}
+
+.desktop-nav ul li{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+
+.desktop-nav h2{
+    display: block;
+    color: white;
+    font-family: melmacracked;
+}
+
+.nav-signup{
+    padding: 12px;
+    border: 1px solid #aa0000;
+    margin-right: 18px;
+    font-family: melma;
+    transition: all .2s ease-in-out; 
+}
+
+.nav-signup:hover{
+    color: #ccc;
+    border-color: var(--second);
+}
+
+.nav-login{
+    padding: 12px;
+    border: 1px solid #ccc;
+    margin-right: 18px;
+    font-family: melma;
+    color: #aaa;
+    background-color: var(--fourth);
+    transition: all .2s ease-in-out; 
+}
+
+.nav-login:hover{
+    color: #ccc;
+    background-color: var(--third);
+}
+
+/*Search bar*/
+
+.search{
+    --padding: 6px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    border-radius: 28px;
+    background: #f6f6f6;
+    margin-right: 80px;
+}
+
+.search-input{;
+    font-family: 'Lexend', sans-serif;
+    color: #333;
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+/*discover section*/
+
+.discover{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    color: black;
+    margin: -25px auto;
+    padding: 22px;
+    /*border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;*/
+    border: 40px solid;
+    border-color: transparent;
+    border-image-source: url("../images/rugged-edge-border.png");
+    border-image-slice: 40 fill;
+    z-index: 4;
+}
+
+.discover h2{
+    color: black;
+}
+
+.discover span{
+    width: 400px;
+    margin-right: 200px;
+}
+
+.discover span p{
+    margin-left: 0px;
+}
+
+.featured-wrapper{
+    width: 310px;
+    height: 389px;
+    background-image: url('../images/poster-box.jpg');
+    background-color: black;
+    padding: 30px;
+    box-shadow: -5px 5px 12px black;
+}
+
+
+.hidden{
+    opacity: 0; 
+    transition: all .5s ease-in-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateX(100px);
+}
+
+.featured-img{
+    background-color: black;
+    width: 250px;
+    height: 329px;
+}
+
+.movies{
+    width: 250px;
+    height: 329px;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    position: absolute;
+}
+
+.movie1{
+    background-image: url("../posters/61QbqeCVm0L.jpg");
+    background-size: cover;
+}
+
+
+.movie2{
+    background-image: url("../posters/thebatman.jpg");
+    background-size: cover;
+}
+
+.movie3{
+    background-image: url("../posters/furiosa.jpg");
+    background-size: cover;
+}
+
+.movie4{
+    background-image: url("../posters/ifmovie.jpg");
+    background-size: cover;
+}
+
+.movie5{
+    background-image: url("../posters/fallguy.jpg");
+    background-size: cover;
+}
+
+
+.showimg{
+    opacity: 1;
+}
+
+/*featured films*/
+
+.featured-films{
+    width: 100%;
+    background-color: var(--first);
+    z-index: -2;
+    position: relative;
+    padding: 80px;
+}
+
+.featured-films h2{
+    text-align: center;
 }

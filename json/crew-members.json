@@ -90,6 +90,24 @@
         "cr_dob": "1976-05-25"
     },
     {
+        "cr_id": "61",
+        "cr_fname": "jonathan",
+        "cr_lname": "nolan",
+        "cr_dob": "1976-06-06"
+    },
+    {
+        "cr_id": "60",
+        "cr_fname": "charles",
+        "cr_lname": "roven",
+        "cr_dob": "1949-08-02"
+    },
+    {
+        "cr_id": "59",
+        "cr_fname": "emma",
+        "cr_lname": "thomas",
+        "cr_dob": "1971-12-09"
+    },
+    {
         "cr_id": "58",
         "cr_fname": "zoe",
         "cr_lname": "kravitz",

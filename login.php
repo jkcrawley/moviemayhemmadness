@@ -30,6 +30,7 @@ $loginToggle = '';
 //Error message
 $errorMessage = '';
 
+
 if(isset($_POST['submit'])){
     $username = mysqli_escape_string($conn, $_POST['username']);
     $password = mysqli_escape_string($conn, $_POST['password']);

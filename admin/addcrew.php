@@ -31,17 +31,32 @@ if(isset($_POST['submit'])){
     
     
 
-    //$textTest = var_dump($crewArr);
-
     for($x = 0; $x < count($crewArr); $x++){
+        $checkMovie = $conn -> real_escape_string($crewArr[$x]['mc_movie']);
+        $checkCrew = $conn -> real_escape_string($crewArr[$x]['mc_crew']);
+        $checkRole = $conn -> real_escape_string($crewArr[$x]['mc_role']);
+
+        $chkSql = "SELECT * FROM movie_crew WHERE mc_movie = ? AND mc_crew = ? AND mc_role = ?";
+        $chkStmt = $conn->prepare($chkSql);
+        $chkStmt->bind_param("sss", $checkMovie, $checkCrew, $checkRole);
+
+        $chkStmt->execute();
+        $chkStmt->store_result();
+
+        $rows = $chkStmt->num_rows;
+
+        //if there are no cast members with respective roles/movies then insert new entry.
+        if($rows == 0){
+            $stmt = $conn->prepare("INSERT INTO movie_crew (mc_movie, mc_crew, mc_role, mc_character) VALUES(?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $crewArr[$x]['mc_movie'], $crewArr[$x]['mc_crew'], $crewArr[$x]['mc_role'], $crewArr[$x]['mc_character']);
+            $stmt->execute(); 
+        }
         
+
     }
-
     
-
-    //for($x = 0; $x < 3; $x++){
-        //$text = print($crewArr[$x]['mc_role']) . "<br />";
-    //}
+    
+    $conn->close();
 }
 
 
@@ -107,9 +122,13 @@ if(isset($_POST['submit'])){
                             </select>
                         </td>
                     </tr>
+                    <tr class='character' style='display: none;'>
+                        <td><b><label for='character'>Which character did the actor play?</label></b></td>
+                        <td><input type='text' name='character' id='character' /></td>
+                    </tr>
 
                     <tr class='crewsection'>
-                        <td><b><label for="fname">Search for Name:  </label></b></td>
+                        <td><b><label for="fname"><span id='actor'>Search for Name:  </span></label></b></td>
                         <td><input type='text' name='crewname' id='crewname' onkeyup='searchRes()'/></td>
                     </tr>
                     <tr>

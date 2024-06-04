@@ -96,6 +96,20 @@ function roleSelect(){
         crewSection[i].style.display = 'table-row';
     }; 
 
+    if(selectMenu.value == 'actor'){
+        document.querySelector('.character').style.display = 'table-row';
+        document.getElementById('actor').innerHTML = 'Played By: '
+    }  else if(selectMenu.value == 'director'){
+        document.querySelector('.character').style.display = 'none';
+        document.getElementById('actor').innerHTML = 'Directed By: '
+    } else if(selectMenu.value == 'producer'){
+        document.querySelector('.character').style.display = 'none';
+        document.getElementById('actor').innerHTML = 'Produced By: '
+    } else if(selectMenu.value == 'screenwriter'){
+        document.querySelector('.character').style.display = 'none';
+        document.getElementById('actor').innerHTML = 'Written By: '
+    }
+
 }
 
 
@@ -136,23 +150,27 @@ function searchRes(){
 
 function addCrew(id, name){
     let crewRole = document.getElementById('role').value;
+    let crewChar = document.getElementById('character').value;
     const movieid = document.getElementById('movieid').value;
 
-    //add new items to object
-    crewObj.push({"mc_movie": movieid, "mc_crew": id, "mc_role": crewRole});
+    //add new items to object.
+    if(crewRole != ''){
+    crewObj.push({"mc_movie": movieid, "mc_crew": id, "mc_role": crewRole, "mc_character": crewChar});
+    }
 
 
 
-
-    //check if directors have been added
+    //Check if directors have been added to javascript object
     let directorsArr = crewObj.filter(artist => artist.mc_role == 'director');
 
+    //compare filtered directors array to JSON crew object
     const dirResults = crew.filter((el) => {
         return directorsArr.some((f) => {
             return f.mc_crew === el.cr_id;
         });
     });
     
+    //If there is more than one entry with the role of 'director', then display all directors.
     if(dirResults.length > 0){
         document.querySelector('.directors').style.display = 'block';
         let disDirectors = [];
@@ -168,7 +186,7 @@ function addCrew(id, name){
 
 
 
-    //check if actors have been added
+    //Repeat process with actors
     const actorsArr = crewObj.filter(artist => artist.mc_role == 'actor');
 
     const actResults = crew.filter((el) => {
@@ -188,12 +206,56 @@ function addCrew(id, name){
         
     }
 
+    //Repeat process with producers
+    const prodsArr = crewObj.filter(artist => artist.mc_role == 'producer');
 
+    const prodResults = crew.filter((el) => {
+        return prodsArr.some((f) => {
+            return f.mc_crew === el.cr_id;
+        });
+    });
+    
+    if(prodResults.length > 0){
+        document.querySelector('.producers').style.display = 'block';
+        let disProducers = [];
+        console.log(crewObj);
+        for(let i = 0; i < prodResults.length; i++){
+            disProducers.push(`<li>${prodResults[i].cr_fname} ${prodResults[i].cr_lname}</li>`);
+        }
+        document.getElementById('producers-list').innerHTML = disProducers.join(' ');
+        
+    }
+
+    //Repeat process with screenwriters
+    const swArr = crewObj.filter(artist => artist.mc_role == 'screenwriter');
+
+    const swResults = crew.filter((el) => {
+        return swArr.some((f) => {
+            return f.mc_crew === el.cr_id;
+        });
+    });
+    
+    if(swResults.length > 0){
+        document.querySelector('.screenwriters').style.display = 'block';
+        let disScreenwriters = [];
+        console.log(crewObj);
+        for(let i = 0; i < swResults.length; i++){
+            disScreenwriters.push(`<li>${swResults[i].cr_fname} ${swResults[i].cr_lname}</li>`);
+        }
+        document.getElementById('screenwriters-list').innerHTML = disScreenwriters.join(' ');
+        
+    }
+
+    console.log(crewObj);
     //reset inputs and displayed data
     crewRole = '';
     document.getElementById('crewSearch').innerHTML = '';
     document.getElementById('crewname').value = '';
     document.getElementById('role').value = '';
+    document.getElementById('character').value = '';
+    document.querySelector('.crewsection').style.display = 'none';
+
+    document.querySelector('.character').style.display = 'none';
     //console.log(crewObj);
     fetch("../json/javascript-json.php", {
         "method": "POST",
