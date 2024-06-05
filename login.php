@@ -71,7 +71,7 @@ if(isset($_POST['submit'])){
                 $memberTools = '/member/tools.php';
             }
 
-            echo "<div class='logsuccess'><h2>Welcome $sessionUser</h2><p><b>Go to your <a href='.$memberTools'>$sessionLevel</a> page</b></p></div>";
+            echo "<div class='logsuccess'><h2>Welcome $sessionUser</h2><p><b>Go to your <a href='.$memberTools'>$sessionLevel</a> page</b></p><p><b>Back to <a href='index.php'>Home Page</a></b></p></div>";
         } else {
             $checkPassword = "<li>Password is invalid</li>";
             $errorMessage = "<div class='error-message'><ul>$checkPassword</ul></div>";

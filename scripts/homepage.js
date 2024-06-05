@@ -1,3 +1,5 @@
+
+
 const discoverSect = document.querySelector('.hidden');
 
 const options = {
@@ -35,3 +37,23 @@ setInterval(()=>{
         counter = 1;
     }
 }, 2000)
+
+//profile drop-down
+
+
+
+function dropdown(){
+    const dropmenu = document.getElementById('prof-menu');
+    const dropbtn = document.querySelector('.dropbtn');
+
+    if(dropmenu.style.scale == '1'){
+        dropmenu.style.scale = '0';
+        dropbtn.style.scale = '1';
+        dropbtn.style.backgroundColor = '#aa0000';
+        
+    } else {
+        dropmenu.style.scale = '1';
+        dropbtn.style.scale = '.9';
+        dropbtn.style.backgroundColor = '#990000';
+    }
+}
