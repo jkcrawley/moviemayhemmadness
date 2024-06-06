@@ -14,7 +14,8 @@ if(isset($_SESSION['userid'])){
 
 //logout menu
 $tools = '';
-$write = '';
+$review = '';
+$article = '';
 
 
 //display links according to user level and privileges.
@@ -22,14 +23,16 @@ $write = '';
 if(isset($_SESSION['userlevel'])){
     $userlevel = $_SESSION['userlevel'];
 
-    if($userlevel = 'admin'){
+    if($userlevel == 'admin'){
         $tools = "<a href='admin/tools.php'>Admin Tools</a>";
-        $write = "<a href='#'>Write a Review</a>";
+        $review = "<a href='#'>Write Review</a>";
+        $article = "<a href='#'>Write Article</a>";
     }
 
-    if($userlevel = 'reviewer'){
+    if($userlevel == 'reviewer'){
         $tools = "";
-        $write = "<a href='#'>Write a Review</a>";
+        $review = "<a href='#'>Write Review</a>";
+        $article = "<a href='#'>Write Article</a>";
     }
 }
 
@@ -70,6 +73,14 @@ if(isset($_SESSION['userlevel'])){
         <nav class='desktop-nav'>
         <h2><a href='index.php'>Movie Mayhem Madness</a></h2>
 
+            <!--Main links -->
+            <ul class='main-links'>
+                <li><a href='#'>Discover</a> </li>
+                <li><a href='#'>Reviews</a></li>
+                <li><a href='#'>Articles</a></li>
+
+            </ul>
+
             <ul>
                 <!--Search button-->
                 <li>
@@ -91,7 +102,8 @@ if(isset($_SESSION['userlevel'])){
 
                         <?php 
                             echo $tools; 
-                            echo $write; 
+                            echo $review;
+                            echo $article; 
                         ?>
                         <a href='logout.php'>Logout</a>
                     </div>
@@ -105,9 +117,14 @@ if(isset($_SESSION['userlevel'])){
             </ul>
         </nav>
 
+        <!-- close menu items -->
+        <div class='closemenu' onclick='closefunc()'></div>
+
         <header class="hero">
-            <h1>Movie <br />&nbsp;&nbsp;&nbsp;&nbsp;Mayhem <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Madness</h1>
-            <h2>Insightful Reviews and ratings for your favorite films.</h2>
+            <div  style='width: 540px;'>
+                <h1>Movie <br />&nbsp;&nbsp;&nbsp;&nbsp;Mayhem <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Madness</h1>
+                <h2>Insightful Reviews and ratings for your favorite popular and cult films.</h2>
+            </div>
         </header>
 
         <section class='discover'>

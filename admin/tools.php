@@ -47,7 +47,7 @@ if($_SESSION['userlevel'] != 'admin'){
                 <li><a href='editmovie.php' target='iframe_content'>Edit Movie</a></li>
             </ul>
 
-            <span style='position: absolute; bottom: 15%; left: 40px; padding: 0;'><a href='../login.php' class='backtosite'>Back to Website</a></span>
+            <span style='position: absolute; bottom: 15%; left: 40px; padding: 0;'><a href='../index.php' class='backtosite'>Back to Website</a></span>
         </nav>
         <h1 style='top: 15%; left: 40%; display: inline; position: absolute; text-align: center;'>&larr; Click on a tool to the left to begin</h1>
         <iframe name='iframe_content' id='iframe_content' class='tool-display' title='Tools Display'></iframe>
