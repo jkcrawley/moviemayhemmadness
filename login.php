@@ -21,6 +21,11 @@ include 'includes/config.php';
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./css/stylesheet.css">
         <link rel="stylesheet" href="./css/login-styles.css">
+
+        <!-- Recaptcha -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        
     </head>
 
 <?php
@@ -91,8 +96,13 @@ if(isset($_POST['submit'])){
 
 }
 
+//recaptcha
+
+
+
 ?>
     <body>
+        
         <div class='login' id='login' <?php echo $loginToggle; ?>>
             <h2>Login</h2>
             <p><b>Don't have an account?</b> <a href='signup.php'>Sign up here.</a></p>
@@ -112,7 +122,11 @@ echo $errorMessage;
                         <td>
                             <label for='password'><h4>Password</h4></label><br />
                             <input type='password' name='password' id='password' placeholder='Enter Password' required />
+                            <p>Forgot Password? <a href='forgotpassword.php'>Click Here</a></p>
                         </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'><div class="g-recaptcha" data-sitekey="6LdMAvMpAAAAAI72WWf7g9BDf03lPpO4q8G7G8d1" style='margin:0px;' ></div></td>
                     </tr>
                     <tr>
                         <td>
@@ -122,8 +136,20 @@ echo $errorMessage;
                 </table>
             </form>
         </div>
-
         
-        <script src="" async defer></script>
+        
     </body>
 </html>
+
+<script>
+$(document).on('click', '#submit', function(){
+
+var response = grecaptcha.getResponse();
+
+if(response.length==0){
+    alert("Please verify that you are not a cybernetic organism: living tissue over a metal endoskeleton.");
+    return false;
+}
+
+});
+</script>

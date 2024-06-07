@@ -65,6 +65,7 @@ if(isset($_POST['submit'])){
     $checkresult = mysqli_query($conn, $checkuser);
     $checkrow = mysqli_fetch_array($checkresult, MYSQLI_ASSOC);
 
+    if(mysqli_num_rows($checkresult)){
     if($username == $checkrow['u_username'] || empty($username) || empty($email) || $email == $checkrow['u_email'] || !filter_var($email, FILTER_VALIDATE_EMAIL) || empty($password) || $password != $conpassword){
         if($username == $checkrow['u_username']){
             $userMatch = "<li>Username already exists.</li>";
@@ -75,7 +76,7 @@ if(isset($_POST['submit'])){
         }
 
         if($email == $checkrow['u_email']){
-            $emailMatch = "<li>That email is already in use.<br /><a href='recoverlogin.php'>Forgot login?</a></li>";
+            $emailMatch = "<li>That email is already in use.<br /><p><a href='forgotpassword.php'>Forgot login?</a></p></li>";
         }
 
         if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -95,7 +96,8 @@ if(isset($_POST['submit'])){
 
 
         
-    } else {
+    }
+} else {
 //sql injection prevention
         $sqluser = mysqli_real_escape_string($conn, $username);
         $sqlpass = mysqli_real_escape_string($conn, $password);
@@ -103,7 +105,7 @@ if(isset($_POST['submit'])){
 //hash password
         $hashpass = password_hash($sqlpass, PASSWORD_BCRYPT);
 
-        $insertUser = "INSERT INTO users (u_username, u_password, u_email, u_newsletter, u_level, u_request) VALUES ('$sqluser', '$hashpass', '$email', '$newsletter', 'member', '$request');";
+        $insertUser = "INSERT INTO users (u_username, u_password, u_email, u_newsletter, u_level, u_request, u_pic) VALUES ('$sqluser', '$hashpass', '$email', '$newsletter', 'member', '$request', 'profile-imgs/empty-prof8735.png');";
 
         if($conn->query($insertUser) === TRUE){
             $_SESSION['username'] = $sqluser;
@@ -128,7 +130,7 @@ if(isset($_POST['submit'])){
 ?>
 
         <div id='register' class="register" <?php echo $registerDisplay ?> >
-            <h2>Sign up to be a member of <span style="color: #aa0000; font-family: marques; font-size: 28px;" class='mobile-heading'>Movie Mayhem Madness</span></h2>
+            <h2>Sign up to be a member of <span style="color: #aa0000; font-family: melmacracked; font-size: 28px;" class='mobile-heading'>Movie Mayhem Madness</span></h2>
             <p><b>Already a member?</b> <a href='login.php'>Login</a></p>
 <?php
 echo $errorMessage;

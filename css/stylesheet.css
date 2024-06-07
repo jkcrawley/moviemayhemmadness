@@ -210,20 +210,27 @@ a:hover{
     color: var(--third);
     font-size: 1.2rem;
     transition: all .2s ease-in-out;
+    font-weight: none;
+    font-family: montserrat;
 }
 
 .main-links a:hover{
-    color: var(--first);
-    font-family: melma;
+    color: #aaa;
     font-weight: none;
 }
 
 .nav-signup{
-    padding: .75rem;
+    padding: .75rem 1.50rem;
     border: 1px solid #aa0000;
     margin-right: 1.125rem;
     font-family: melma;
     transition: all .2s ease-in-out; 
+    background: none;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 1rem;
+    font-family: montserrat;
+    width: 7.75rem;
 }
 
 .nav-signup:hover{
@@ -232,13 +239,16 @@ a:hover{
 }
 
 .nav-login{
-    padding: .75rem;
+    padding: .75rem 1.50rem;
     border: 1px solid #ccc;
     margin-right: 18px;
-    font-family: melma;
     color: #aaa;
+    font-size: 1rem;
+    font-family: montserrat;
     background-color: var(--fourth);
     transition: all .2s ease-in-out; 
+    width: 7.75rem;
+    cursor: pointer;
 }
 
 .nav-login:hover{
@@ -289,6 +299,7 @@ a:hover{
 
 .profile-links a:hover{
     background-color: #111;
+    color: #aaa;
 }
 
 /*close all menus */
@@ -356,8 +367,9 @@ a:hover{
 
 .discover span a{
     text-decoration: none;
-    padding: .75rem 2.25rem;
+    padding: .75rem 1.50rem;
     color: #aaa;
+    font-size: 1em;
     background-color: var(--fifth);
     transition: all .2s ease-in-out;
 }
@@ -446,4 +458,22 @@ a:hover{
 
 .featured-films h2{
     text-align: center;
+}
+
+
+/* media queries */
+
+@media screen and (max-width: 1220px){
+    .desktop-nav ul{
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-signup{
+        margin: .35rem;
+    }
+
+    .nav-login{
+        margin: .35rem;
+    }
+
 }

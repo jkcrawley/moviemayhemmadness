@@ -1,3 +1,11 @@
+/* recaptcha */
+
+
+
+.g-recaptcha { 
+    margin-left: 513px; 
+}
+
 .login{
     display: block;
     background-color: white;
