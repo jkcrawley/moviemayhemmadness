@@ -66,17 +66,14 @@ if(isset($_POST['submit'])){
 
             $loginToggle = "style='display: none;'";
 
-            $memberTools = '';
+            $adminTools = '';
 
+            //display link to admin tools if user is an Admin.
             if($sessionLevel == 'admin'){
-                $memberTools = '/admin/tools.php';
+                $adminTools = "<p><b>Go to your <a href='/admin/tools.php'>Admin Tools</a></p>";
             }
 
-            if($sessionLevel == 'member'){
-                $memberTools = '/member/tools.php';
-            }
-
-            echo "<div class='logsuccess'><h2>Welcome $sessionUser</h2><p><b>Go to your <a href='.$memberTools'>$sessionLevel</a> page</b></p><p><b>Back to <a href='index.php'>Home Page</a></b></p></div>";
+            echo "<div class='logsuccess'><h2>Welcome $sessionUser</h2>$adminTools<p>Go to your <a href='profile.php'>Profile</a></p><p><b>Back to <a href='index.php'>Home Page</a></b></p></div>";
         } else {
             $checkPassword = "<li>Password is invalid</li>";
             $errorMessage = "<div class='error-message'><ul>$checkPassword</ul></div>";

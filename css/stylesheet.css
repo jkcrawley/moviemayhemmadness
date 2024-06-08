@@ -133,6 +133,19 @@ a:hover{
     margin: auto;
 }
 
+.grain{
+    width: 100%;
+    height: 56.25rem;
+    background-image: url('../images/grain.gif');
+    background-color: none;
+    opacity: .25;
+    top: 0;
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    clear: both;
+}
+
 .hero{
     width: 100%;
     height: 56.25rem;
@@ -149,6 +162,7 @@ a:hover{
     align-items: left;
     justify-content: center;
     flex-direction: column;
+    z-index: 3;
 }
 
 .hero h1{
@@ -175,13 +189,13 @@ a:hover{
     color: white;
     padding: 2.1875rem;
     top: 0;
-    background-color: black;
+    background-color: #111;
     width: 100%;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 20;
+    z-index: 40;
 }
 
 .desktop-nav ul{
@@ -283,7 +297,7 @@ a:hover{
 .profile-links{
     text-align: center;
     position: absolute;
-    background-color: #000;
+    background-color: #111;
     min-width: 12.5rem;
     transform: translate(-80px, 30px);
     border: 1px solid #333;
@@ -349,7 +363,8 @@ a:hover{
     border-color: transparent;
     border-image-source: url("../images/rugged-edge-border.png");
     border-image-slice: 40 fill;
-    z-index: 4;
+    position: relative;
+    z-index: 20;
 }
 
 .discover h2{
@@ -405,6 +420,7 @@ a:hover{
     background-color: black;
     width: 15.625rem;
     height: 20.5625rem;
+    z-index: 0;
 }
 
 .movies{
@@ -413,32 +429,38 @@ a:hover{
     opacity: 0;
     transition: all .5s ease-in-out;
     position: absolute;
+    z-index: 0;
 }
 
 .movie1{
     background-image: url("../posters/61QbqeCVm0L.jpg");
     background-size: cover;
+    z-index: 0;
 }
 
 
 .movie2{
     background-image: url("../posters/thebatman.jpg");
     background-size: cover;
+    z-index: 0;
 }
 
 .movie3{
     background-image: url("../posters/furiosa.jpg");
     background-size: cover;
+    z-index: 0;
 }
 
 .movie4{
     background-image: url("../posters/ifmovie.jpg");
     background-size: cover;
+    z-index: 0;
 }
 
 .movie5{
     background-image: url("../posters/fallguy.jpg");
     background-size: cover;
+    z-index: 0;
 }
 
 

@@ -26,7 +26,7 @@
                         <span class="material-symbols-outlined person">person</span>
                     </button>
                     <div id="prof-menu" class="profile-links">
-                        <a href='#'>My Profile</a>
+                        <a href='profile.php?id=<?php echo $_SESSION['userid'] ?>'>My Profile</a>
 
                         <?php 
                             echo $tools; 

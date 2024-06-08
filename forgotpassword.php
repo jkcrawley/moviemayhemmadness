@@ -18,11 +18,13 @@ if(isset($_POST['email'])){
 $toggle = '';
 
 //variable to display errors
-$error = '';
+$header = '<h2>Forgot Password?</h2>';
+$error ='';
 
 //compare user input to sql
 $sql = "SELECT * FROM users WHERE u_email = '$email'";
 $result = $conn->query($sql);
+$row = $result->fetch_assoc();
 
 
 if(isset($_POST['submit'])){
@@ -48,10 +50,14 @@ if(isset($_POST['submit'])){
         $updateSQL = "UPDATE users SET u_password = '$hashPass'";
 
         if($conn->query($updateSQL) == TRUE){
-            $error = "<p style='background-color: red; color: white'>Password has been sent!</p>";
+            $header = "<h2>Password has been sent!</h2><p>Be sure to check your junk mail if it is not found in your inbox.</p>";
 
-            $textbody = "<h1 style='font-family: melmacracked; font-size: 3rem;'>Movie Mayhem Madness</h1><p>Your new password is: $randPass</p>";
+            $username = $row['u_username'];
+
+            $textbody = "<h1 style='font-family: melmacracked; font-size: 3rem;'>Movie Mayhem Madness</h1><p>You can <a href='https://www.jkcrawley.com/moviemayhemmadness/login.php' style='text-decoration: none; font-weight: bold; padding: .375rem .75rem; background-color: #00aa00; color: #ccc;'>Log in</a> with your new password and reset it from your profile page.</p><p><b>Username:</b> $username<br /><b>Your new password is:</b> $randPass</p>";
             sendMail($email, 'Your password has been reset', $textbody);
+
+            $toggle = "style='display:none'";
         } else {
             $error = "<p style='background-color: red; color: white'>Something went wrong!</p>";
         }
@@ -113,9 +119,9 @@ if(isset($_POST['submit'])){
     <body>
         <div class='wrapper'>
             <div class='content'>
-                <h2>Forgot Password?</h2>
-                <?php echo $error; ?>
-                <form action='forgotpassword.php' method='post'>
+                <?php echo $header;
+                echo $error; ?>
+                <form action='forgotpassword.php' method='post' <?php echo $toggle; ?>>
                     <table>
                         <tr>
                             <td>

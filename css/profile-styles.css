@@ -1,0 +1,63 @@
+.profile{
+    background-color: #111;
+    margin: auto;
+    margin-top: 7.5rem;
+    padding: 1.125rem;
+    width: 67.5rem;
+    display: flex;
+}
+
+.update-pic{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.prof-pic{
+    height: 7.5rem;
+    width: 7.5rem;
+    background-color: #bbb;
+    color: #ccc;
+    background-size: cover;
+    border-radius: 50%;
+    background-position: center;
+}
+
+.prof-txt{
+    height: 100%;
+    display: block;
+    border: 1px solid white;
+    padding: 18px;
+}
+
+.profile h2{
+    color: #ccc;
+    display: inline;
+    padding: 1.125rem;
+    padding-left: 7.5rem;
+}
+
+.profile h3{
+    color: #ccc;
+    padding-left: 7.5rem;
+}
+
+/*styles for upload button*/
+.picbtn{
+    display: none;
+}
+
+
+.piclabel{
+    border: 1px solid #999;
+    color: #ccc;
+    background-color: #333;
+    padding: .375rem .75rem;
+    border-radius: .75rem;
+    margin-top: .75rem;
+    cursor: pointer;
+}
+
+.piclabel:hover{
+    background-color: #555;
+}

@@ -24,27 +24,21 @@ include 'includes/sessions.php';
 
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <style>
-            /* Hide desktop-nav to check php errors
-
-            .desktop-nav{
-                display: none;
-            }
-            */
-        </style>
     </head>
     <body>
+    
     <div id="loader" class="center"></div>
     <div class="wrapper">
-
+    
         <!-- Desktop navigation -->
         <?php
 
             include 'includes/main-nav.php';
 
         ?>
-
+        
         <header class="hero">
+            <div class='grain'></div>
             <div  style='width: 540px;'>
                 <h1>Movie <br />&nbsp;&nbsp;&nbsp;&nbsp;Mayhem <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Madness</h1>
                 <h2>Insightful Reviews and ratings for your favorite popular and cult films.</h2>
@@ -76,18 +70,18 @@ include 'includes/sessions.php';
         </section>
     </div>
 
-    <script src="./scripts/homepage.js" defer>
-        //page loader
+    <script>
         document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
         document.querySelector("body").style.visibility = "hidden";
         document.querySelector("#loader").style.visibility = "visible";
-        document.querySelector('.wrapper').style.display = 'none';
     } else {
         document.querySelector("#loader").style.display = "none";
         document.querySelector("body").style.visibility = "visible";
     }
 };
     </script>
+    <script src="./scripts/homepage.js" defer></script>
+    <script src="./scripts/navigation.js" defer></script>
     </body>
 </html>

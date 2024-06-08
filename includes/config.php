@@ -19,7 +19,7 @@ define('MAILHOST', "smtp.gmail.com");
 
 define('USERNAME', "jcrawl6554@gmail.com");
 
-define('PASSWORD', "zegdgovrsqgjelce");
+define('PASSWORD', "ndkf qwxj ihvr ytog");
 
 define('SEND_FROM', "jcrawl6554@gmail.com");
 
