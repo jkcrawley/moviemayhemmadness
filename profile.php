@@ -10,6 +10,29 @@ $profRow = $profResult->fetch_assoc();
 
 $profpic = $profRow['u_pic'];
 
+//check if logged in
+
+$loginErr = '';
+
+if(!isset($_SESSION['userid'])){
+    $loginErr = "<h2 style='text-align: center;'>You need to be logged in to view this page</h2>";
+}
+
+//check if user is a reviewer or admin to display ability to write an article or use tools.
+$write = '';
+
+$tools = '';
+
+if($_SESSION['userlevel'] == 'admin' || $_SESSION['userlevel'] == 'reviewer'){
+    $write = "<p><a href='write.php?id=" . $_SESSION['userid'] . "'>Write Review/Article</a></p>";
+
+    if($_SESSION['userlevel'] == 'admin'){
+        $tools = "<p><a href='admin/tools.php' >Admin tools</a></p>";
+    }
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -38,12 +61,25 @@ $profpic = $profRow['u_pic'];
             <?php include "includes/main-nav.php"; ?>
             <div class="profile">
                     <div class="update-pic">
+                        
                         <div class="prof-pic" style="background-image: url('<?php echo $profpic; ?>');" ></div>
-                        <label for='picbtn' class='piclabel'>Update Profile Pic</label><input type='file' class='picbtn' id='picbtn' />
+                        <form action='profile.php' method='post' enctype='multipart/form-data' style='margin: 0; margin-top: 1rem; padding: 0; display: inline-block;'>
+                        
+                        <label for='picbtn' class='profbtn'>Update Profile Pic</label><input type='file' class='picbtn' id='picbtn' />
+                        </form>
                     </div>
                     <div class="prof-text">
+                        <?php echo $loginErr; ?>
                         <h2><?php echo " " . $profRow['u_username']; ?></h2>
-                        <h3><?php echo " " . $profRow['u_level']; ?>
+                        <h3><?php echo " " . $profRow['u_level']; ?></h3>
+                        <p><b>Email:</b> <?php echo $profRow['u_email'];  ?></p>
+                        <p>
+                            <a href="resetpassword.php?id=<?php echo $_SESSION['userid']; ?>" >Reset Password</a>
+                        </p>
+                        <?php 
+                            echo $write;
+                            echo $tools;
+                        ?>
                     </div>
             </div>
        </div>
