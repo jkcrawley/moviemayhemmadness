@@ -35,4 +35,10 @@ if(isset($_SESSION['userlevel'])){
     }
 }
 
+
+$loginErr = '';
+
+if(!isset($_SESSION['userid'])){
+    $loginErr = "<h2 style='text-align: center;'>You need to be logged in to view this page</h2>";
+}
 ?>

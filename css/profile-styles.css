@@ -5,6 +5,8 @@
     padding: 1.125rem;
     width: 67.5rem;
     display: flex;
+    justify-content: center;
+    color: #ccc;
 }
 
 .profile p{
@@ -13,6 +15,10 @@
     color: #ccc;
 }
 
+
+.profile table tr td{
+    padding: 1.25rem;
+}
 
 
 .update-pic{
@@ -71,4 +77,10 @@
 .profbtn:hover{
     background-color: #444;
     color: #ddd;
+}
+
+/* form styles */
+
+input[type='password']{
+    padding: .375rem;
 }

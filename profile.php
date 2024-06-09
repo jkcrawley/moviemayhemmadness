@@ -4,6 +4,8 @@ SESSION_START();
 include 'includes/config.php';
 include 'includes/sessions.php';
 
+
+
 $profSQL = "SELECT * FROM users WHERE u_id = " . $_SESSION['userid'];
 $profResult = $conn->query($profSQL);
 $profRow = $profResult->fetch_assoc();
@@ -11,12 +13,6 @@ $profRow = $profResult->fetch_assoc();
 $profpic = $profRow['u_pic'];
 
 //check if logged in
-
-$loginErr = '';
-
-if(!isset($_SESSION['userid'])){
-    $loginErr = "<h2 style='text-align: center;'>You need to be logged in to view this page</h2>";
-}
 
 //check if user is a reviewer or admin to display ability to write an article or use tools.
 $write = '';
@@ -57,6 +53,7 @@ if($_SESSION['userlevel'] == 'admin' || $_SESSION['userlevel'] == 'reviewer'){
         
     </head>
     <body>
+        <div id="loader" class="center"></div>
        <div class="wrapper">
             <?php include "includes/main-nav.php"; ?>
             <div class="profile">
@@ -74,7 +71,7 @@ if($_SESSION['userlevel'] == 'admin' || $_SESSION['userlevel'] == 'reviewer'){
                         <h3><?php echo " " . $profRow['u_level']; ?></h3>
                         <p><b>Email:</b> <?php echo $profRow['u_email'];  ?></p>
                         <p>
-                            <a href="resetpassword.php?id=<?php echo $_SESSION['userid']; ?>" >Reset Password</a>
+                            <a href="resetpassword.php" >Reset Password</a>
                         </p>
                         <?php 
                             echo $write;
@@ -84,7 +81,17 @@ if($_SESSION['userlevel'] == 'admin' || $_SESSION['userlevel'] == 'reviewer'){
             </div>
        </div>
         
-       <!--<script src="./scripts/homepage.js" defer></script>-->
+       <script>
+        document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+            document.querySelector("body").style.visibility = "hidden";
+            document.querySelector("#loader").style.visibility = "visible";
+        } else {
+            document.querySelector("#loader").style.display = "none";
+            document.querySelector("body").style.visibility = "visible";
+        }
+    };
+    </script>
         <script src="./scripts/navigation.js" defer></script>
     </body>
 </html>
