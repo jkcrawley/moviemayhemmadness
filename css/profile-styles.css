@@ -61,7 +61,6 @@
     display: none;
 }
 
-
 .profbtn{
     border: 1px solid #999;
     color: #ccc;
@@ -79,8 +78,32 @@
     color: #ddd;
 }
 
+.upload{
+    background-color: #111;
+}
+
+.upload:hover{
+    background-color: #222;
+}
+
+.upload-sub{
+    width: 100%; 
+    font-weight: bold;
+    display: none;
+}
+
 /* form styles */
 
 input[type='password']{
     padding: .375rem;
+}
+
+/* Icons */
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
