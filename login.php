@@ -36,6 +36,7 @@ $loginToggle = '';
 $errorMessage = '';
 
 
+
 if(isset($_POST['submit'])){
     $username = mysqli_escape_string($conn, $_POST['username']);
     $password = mysqli_escape_string($conn, $_POST['password']);
@@ -45,8 +46,7 @@ if(isset($_POST['submit'])){
     $logResult = mysqli_query($conn, $sqlLogin);
     $logRow = mysqli_fetch_array($logResult, MYSQLI_ASSOC);
 
-    //get hashed password from database
-    $hashPass = $logRow['u_password'];
+    
 
     //return rows containing given username
     $count = mysqli_num_rows($logResult);
@@ -54,7 +54,8 @@ if(isset($_POST['submit'])){
     $checkPassword = '';
     if($count == 1){
 
-        
+        //get hashed password from database
+        $hashPass = $logRow['u_password'];
 
         if(password_verify($password, $hashPass)){
             $_SESSION['username'] = $logRow['u_username'];
@@ -82,7 +83,7 @@ if(isset($_POST['submit'])){
         $checkUser = '';
 
 
-        if($username != $logRow['username']){
+        if($count == 0){
             $checkUser = '<li>Username does not exist</li>';
         }
 
