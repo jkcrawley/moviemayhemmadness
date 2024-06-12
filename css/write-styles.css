@@ -47,6 +47,13 @@ table tr td{
     display: none;
 }
 
+
+/* Toggle Review input */
+
+.toggleReview{
+    display: none;
+}
+
 /* Search movie field */
 
 .search-movie{
@@ -68,6 +75,22 @@ table tr td{
     outline: none;
 }
 
+.movieBtn{
+    padding: .5rem 1rem;
+    margin: .25rem;
+    background-color: #111;
+    font-weight: bold;
+    outline: none;
+    border: 1px solid #aaa;
+    color: #ccc;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+.movieBtn:hover{
+    background-color: #222;
+    color: #eee;
+}
 
 input[type='submit']{
     width: 100%;
