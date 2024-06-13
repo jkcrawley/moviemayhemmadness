@@ -8,7 +8,25 @@ include 'includes/sessions.php';
 $json_file = file_get_contents('./json/movies.json');
 $json_movies = json_decode($json_file, JSON_OBJECT_AS_ARRAY);
 
+$error = '';
 
+//submit review
+if(isset($_POST['submit-review'])){
+    $user = $_SESSION['userid'];
+    $movie = $_POST['movieid'];
+    $rating = $_POST['rating'];
+    $summary = mysqli_escape_string($conn, $_POST['review-summary']);
+    $review = mysqli_escape_string($conn, nl2br($_POST['review']));
+    $date = date('Y-m-d H:i:s');
+    $type = 'review';
+
+
+    $insertReview = "INSERT INTO reviews (r_movie, r_rating, r_summary, r_content, r_date, r_user, r_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($insertReview);
+    $stmt->bind_param("sssssss", $movie, $rating, $summary, $review, $date, $user, $type);
+
+    $stmt->execute();
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +55,8 @@ $json_movies = json_decode($json_file, JSON_OBJECT_AS_ARRAY);
             <div class="write-forms">
                 <!-- Select Article type -->
                  <h2 style='margin: 0; padding: 0;'>Write Review/Article</h2>
+                 <!-- php error checking -->
+                 <?php echo $error; ?>
                  <p>
                     <select name='article-type' id='article-type' class="dropdwn-styles" onchange='typeFunc()'>
                         <option value='default'>Select Article type</option>
@@ -47,61 +67,58 @@ $json_movies = json_decode($json_file, JSON_OBJECT_AS_ARRAY);
 
                 <!--Display Review form is selected -->
                 <div class="review-form">
-                    <form name='review' id='review' action='write.php'>
+                    <form name='review' id='review' action='write.php' method='post'>
                         <table>
                             <tr>
-                                <td style='text-align: right;'><b>Search for Movie:</b></td>
-                                <td  style='text-align: left;'>
-                                    <div class="search-movie" style='width: 244px;'>
+                                <td style='text-align: center;' colspan='2'><b>Search for Movie:</b>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div class="search-movie" style='width: 244px; display: inline;'>
                                         <span class="material-symbols-outlined" style='vertical-align: bottom;'>search</span>
                                         <input type='text' name='search-movie' id='search-movie' />
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='2' style='text-align: center;'><span id='movieResults'></span></td>
+                                <td colspan='2' style='text-align: center;'>
+                                    <span id='movieResults'></span>
+                                    <input type='hidden' name='movieid' id='movieid'/>
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan='2'>
-
-                                    <!--Display text inputs once user chooses a movie -->
-                                    <table class='toggleReview'>
-                                        <tr>
-                                            <td colspan='2' style='text-align: center;'>
-                                                <select name='rating' class='dropdwn-styles' id='rating-dropdwn'>
-                                                    <option value='default'>Choose a rating</option>
-                                                    <option value='1' style='color: yellow;'>&starf;</option>
-                                                    <option value='2' style='color: yellow'>&starf;&starf;</option>
-                                                    <option value='3' style='color: yellow'>&starf;&starf;&starf;</option>
-                                                    <option value='4' style='color: yellow'>&starf;&starf;&starf;&starf;</option>
-                                                    <option value='5' style='color: yellow'>&starf;&starf;&starf;&starf;&starf;</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan='2'>
-                                                <b>Summary:</b><br /><i>&#40;Maximum Characters: 60&#41;</i> Current count: <span id='summary-count'></span>
-                                                <p style='margin-left: 0;'>
-                                                    <textarea name='summary' id='summary' style='width: 70ch; height: 3rem;'></textarea>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan='2'>
-                                                <b>Review:</b>
-                                                <p style='margin-left: 0;'>
-                                                    <textarea name='review' id='review' style='width: 70ch; height: 10rem;'></textarea>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan='2'>
-                                                <input type='submit' name='submit-review' id='submit-review' value='Submit Review'  />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </table>
-                        </form>
+                            <tr>
+                                <td colspan='2' style='text-align: center; padding-top: 1rem;' class='rating-dropdwn'>
+                                    <select name='rating' class='dropdwn-styles' id='rating-dropdwn' required>
+                                        <option value='default'>Choose a rating</option>
+                                        <option value='1' style='color: yellow;'>&starf;</option>
+                                        <option value='2' style='color: yellow'>&starf;&starf;</option>
+                                        <option value='3' style='color: yellow'>&starf;&starf;&starf;</option>
+                                        <option value='4' style='color: yellow'>&starf;&starf;&starf;&starf;</option>
+                                        <option value='5' style='color: yellow'>&starf;&starf;&starf;&starf;&starf;</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='2' class='review-summary'>
+                                    <b>Summary:</b><br /><i>&#40;Maximum Characters: 120&#41;</i><br />Current count: <span id='summary-count'></span>
+                                    <p style='margin-left: 0;'>
+                                        <textarea name='review-summary' id='review-summary' style='width: 70ch;' rows='4'  maxlength='120' required></textarea>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='2' class='review'>
+                                    <b>Review:</b>
+                                    <p style='margin-left: 0;'>
+                                        <textarea name='review' id='review-text' style='width: 70ch; height: 10rem;' required></textarea>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='2' class='reviewBtn'>
+                                    <input type='submit' name='submit-review' id='submit-review' value='Submit Review'  />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
                 <div class='article-form'>
                     <form name='article' action='write.php' method='post'>
@@ -142,7 +159,9 @@ $json_movies = json_decode($json_file, JSON_OBJECT_AS_ARRAY);
         <script src="./scripts/write.js" defer></script>
         <script defer>
             const movieArr = <?php echo json_encode($json_movies); ?>;
-            //console.log(movieArr);
+
+            //get userid for object insertion
+            const userid = <?php echo $_SESSION['userid']; ?>;
         </script>
         
     </body>

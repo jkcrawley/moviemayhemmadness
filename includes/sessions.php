@@ -24,14 +24,12 @@ if(isset($_SESSION['userlevel'])){
 
     if($userlevel == 'admin'){
         $tools = "<a href='admin/tools.php'>Admin Tools</a>";
-        $review = "<a href='#'>Write Review</a>";
-        $article = "<a href='#'>Write Article</a>";
+        $review = "<a href='write.php'>Write Review/Article</a>";
     }
 
     if($userlevel == 'reviewer'){
         $tools = "";
-        $review = "<a href='#'>Write Review</a>";
-        $article = "<a href='#'>Write Article</a>";
+        $review = "<a href='write.php'>Write Review/Article</a>";
     }
 }
 

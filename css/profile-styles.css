@@ -1,11 +1,15 @@
+
+
 .profile{
     background-color: #111;
     margin: auto;
     margin-top: 7.5rem;
     padding: 1.125rem;
     width: 67.5rem;
+    height: 80vh;
     display: flex;
     justify-content: center;
+    align-items: center;;
     color: #ccc;
 }
 
@@ -25,6 +29,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: start;
 }
 
 .prof-pic{

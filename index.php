@@ -67,6 +67,58 @@ include 'includes/sessions.php';
 
         <section class='featured-films'>
             <h2>Latest Reviews</h2>
+            <div class="latest-wrapper">
+<?php
+$moviesSQL = "SELECT m_title, r_movie, r_summary, AVG(r_rating) AS rating, m_poster FROM reviews, movies WHERE reviews.r_movie = movies.m_id GROUP BY r_movie";
+
+if($result = mysqli_query($conn, $moviesSQL)){
+
+    if(mysqli_num_rows($result) > 0){
+        
+
+        while ($row = mysqli_fetch_array($result)){
+            $stars = "";
+
+            if($row['rating'] == 1){
+                $stars = "&starf;";
+            }
+
+            if($row['rating'] == 2){
+                $stars = "&starf;&starf;";
+            }
+
+            if($row['rating'] == 3){
+                $stars = "&starf;&starf;&starf;";
+            }
+
+            if($row['rating'] == 4){
+                $stars = "&starf;&starf;&starf;&starf;";
+            }
+
+            if($row['rating'] == 5){
+                $stars = "&starf;&starf;&starf;&starf;&starf;";
+            }
+
+            
+            ?>
+            <a href='movie.php?id=<?php echo $row['r_movie']; ?>' style='color: black; font-weight: none;'>
+                <div class="recent-movie">
+                
+                    <?php
+                    echo "<h3>" . $row['m_title'] . "</h3>";
+                    echo "<div style='display: flex; align-items: start; clear: right; margin: 2rem 0rem; width: 21.875rem'>";
+                    echo "<div style=\"background-image:url('./posters/" . $row['m_poster'] . "'); background-size: cover; min-width: 9.375rem; display: inline-block; min-height: 12.3125rem;\"></div>";
+                    echo "<p style='font-weight: none; font-family: poppins; margin: 0; margin-left: 1rem; padding: 0;'>" . $row['r_summary'] . "</p></div>";
+                    echo "<p style='margin-bottom: 0px; padding-bottom: 0px;'>Average User Ratings</p><p style='color:yellow; margin-top: -1rem; padding: -1rem;'><br />" . $stars . "</p>";
+                    ?>
+                </div>
+            </a>
+            <?php
+        }
+    }
+}
+?>
+            </div>
         </section>
     </div>
 

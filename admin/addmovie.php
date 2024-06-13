@@ -117,6 +117,7 @@ if(isset($_POST['submit'])){
             mysqli_stmt_bind_param($stmt, "sssssss", $title, $filename, $releaseDate, $runtime, $budget, $boxoffice,  $premise);
             mysqli_stmt_execute($stmt);
             $toggleDisplay = "style='display: none;";
+            include("../json/php-json.php");
             $successMessage = "<div class='content-wrapper' style='flex-direction: column; justify-content: center; align-items: center;'><h2 style='display: block;'>$title has been added to the database!</h2><p style='display: block;'><a href='addmovie.php'>&larr; Add another movie.</p></div>";
 
         }
